@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" fill="none">
+  <defs>
+    <filter id="coffee-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#2d1e0f" flood-opacity="0.16" />
+    </filter>
+  </defs>
+
+  <g filter="url(#coffee-shadow)">
+    <!-- White Die-Cut Sticker Outline -->
+    <!-- Handle outline -->
+    <path d="M52 32 C62 32, 64 48, 52 50" stroke="#ffffff" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <!-- Mug outline -->
+    <path d="M22 26 H54 V48 C54 58, 48 64, 38 64 C28 64, 22 58, 22 48 Z" fill="#ffffff" stroke="#ffffff" stroke-width="7" stroke-linejoin="round"/>
+    
+    <!-- Mug Handle -->
+    <path d="M52 33 C60 33, 62 47, 52 49" stroke="#b45309" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    
+    <!-- Mug Body -->
+    <path d="M24 28 H52 V48 C52 56, 46 62, 38 62 C30 62, 24 56, 24 48 Z" fill="#fef3c7" stroke="#b45309" stroke-width="2" />
+    
+    <!-- Chai / Coffee Fill Liquid Rim -->
+    <ellipse cx="38" cy="28" rx="14" ry="3.5" fill="#78350f" stroke="#b45309" stroke-width="1.5" />
+    <ellipse cx="38" cy="28" rx="11" ry="2.2" fill="#92400e" />
+
+    <!-- Cute Heart Emblem on Mug -->
+    <path d="M38 48 C38 48, 32 43, 32 39 C32 36.5, 34 35, 36 35 C37.2 35, 38 36, 38 36 C38 36, 38.8 35, 40 35 C42 35, 44 36.5, 44 39 C44 43, 38 48, 38 48 Z" 
+          fill="#d97706" />
+
+    <!-- Steaming Swirls -->
+    <path d="M32 20 Q 30 14, 34 8" stroke="#d97706" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <path d="M42 21 Q 45 15, 41 9" stroke="#d97706" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+  </g>
+</svg>

@@ -1,0 +1,350 @@
+/* Scrapbook Design Tokens & Core Foundation */
+:root {
+  /* Paper & Backgrounds */
+  --bg-desk: #2b2520;
+  --bg-desk-wood: #221d19;
+  --paper-kraft: #dfd3be;
+  --paper-cream: #fbf7ee;
+  --paper-ivory: #fcf9f2;
+  --paper-warm: #f5ede0;
+  --paper-card: #ffffff;
+  --paper-dark: #1f1b18;
+
+  /* Ink & Typography */
+  --ink-primary: #1c1815;
+  --ink-secondary: #4a423a;
+  --ink-muted: #786e63;
+  --ink-faint: #ad9f90;
+  --ink-blue: #1d4ed8;
+  --ink-red: #b91c1c;
+
+  /* Washi Tape Palette */
+  --tape-yellow: rgba(254, 240, 138, 0.85);
+  --tape-peach: rgba(254, 215, 170, 0.85);
+  --tape-pink: rgba(251, 207, 232, 0.85);
+  --tape-mint: rgba(187, 247, 208, 0.85);
+  --tape-lavender: rgba(233, 213, 255, 0.85);
+  --tape-cyan: rgba(186, 230, 253, 0.85);
+  --tape-coral: rgba(254, 202, 202, 0.85);
+
+  /* Scrapbook Accents */
+  --stamp-red: #c2412d;
+  --stamp-green: #2d6a4f;
+  --highlighter-yellow: #fef08a;
+  --highlighter-pink: #fbcfe8;
+  --highlighter-mint: #bbf7d0;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-hand: 'Caveat', cursive;
+  --font-notes: 'Patrick Hand', cursive;
+  --font-marker: 'Permanent Marker', cursive;
+  --font-typewriter: 'Special Elite', monospace;
+
+  /* Shadows */
+  --shadow-paper: 0 4px 6px -1px rgba(33, 22, 12, 0.08), 0 10px 25px -5px rgba(33, 22, 12, 0.12);
+  --shadow-polaroid: 0 8px 20px -3px rgba(28, 20, 12, 0.18), 0 3px 6px -1px rgba(28, 20, 12, 0.1);
+  --shadow-sticker: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-pin: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Base Reset & Styling */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink-primary);
+  background-color: #e4d7c5;
+  background-image: 
+    radial-gradient(#baa690 0.75px, transparent 0.75px),
+    linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px, 48px 48px;
+  background-position: 0 0, 0 0, 0 0;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Selection */
+::selection {
+  background: var(--highlighter-yellow);
+  color: #1a1a1a;
+}
+
+/* Scrapbook Main Container - mimics an open spiral sketchbook or corkboard desk */
+.scrapbook-desk {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 16px 80px 16px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .scrapbook-desk {
+    padding: 32px 24px 100px 24px;
+  }
+}
+
+/* Washi Tape Component */
+.washi-tape {
+  position: absolute;
+  height: 28px;
+  border-radius: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  opacity: 0.92;
+  z-index: 10;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.15) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  /* Jagged torn edges using clip-path */
+  clip-path: polygon(
+    0% 4%, 2% 0%, 5% 5%, 8% 1%, 12% 4%, 15% 0%, 19% 4%, 23% 1%,
+    97% 0%, 100% 4%, 98% 8%, 100% 14%, 97% 20%, 100% 26%, 98% 32%,
+    100% 40%, 97% 48%, 100% 55%, 98% 65%, 100% 72%, 97% 80%, 100% 88%,
+    98% 95%, 100% 100%, 95% 97%, 92% 100%, 88% 96%, 85% 100%, 80% 96%,
+    2% 100%, 0% 96%, 2% 88%, 0% 80%, 2% 70%, 0% 60%, 2% 48%, 0% 36%, 2% 20%
+  );
+}
+
+.washi-tape-yellow { background-color: var(--tape-yellow); }
+.washi-tape-peach { background-color: var(--tape-peach); }
+.washi-tape-pink { background-color: var(--tape-pink); }
+.washi-tape-mint { background-color: var(--tape-mint); }
+.washi-tape-lavender { background-color: var(--tape-lavender); }
+.washi-tape-cyan { background-color: var(--tape-cyan); }
+.washi-tape-coral { background-color: var(--tape-coral); }
+
+/* Kraft & Paper Cards */
+.paper-sheet {
+  background: var(--paper-cream);
+  border-radius: 8px;
+  box-shadow: var(--shadow-paper);
+  position: relative;
+  border: 1px solid rgba(190, 175, 155, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.paper-sheet-kraft {
+  background: var(--paper-kraft);
+  border-color: rgba(140, 115, 85, 0.3);
+}
+
+.paper-sheet-ruled {
+  background-color: var(--paper-cream);
+  background-image: 
+    linear-gradient(90deg, transparent 54px, rgba(239, 68, 68, 0.3) 54px, rgba(239, 68, 68, 0.3) 56px, transparent 56px),
+    linear-gradient(rgba(100, 116, 139, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 28px;
+  line-height: 28px;
+}
+
+.paper-sheet-grid {
+  background-color: #fffefb;
+  background-image:
+    linear-gradient(rgba(74, 85, 104, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 85, 104, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Polaroid Photo Card */
+.polaroid-frame {
+  background: #ffffff;
+  padding: 14px 14px 22px 14px;
+  border-radius: 3px;
+  box-shadow: var(--shadow-polaroid);
+  position: relative;
+  display: inline-block;
+  transform: rotate(var(--rot, -2deg));
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.03) translateY(-4px);
+  box-shadow: 0 16px 32px -4px rgba(28, 20, 12, 0.22);
+  z-index: 20;
+}
+
+.polaroid-image-wrapper {
+  overflow: hidden;
+  border-radius: 2px;
+  background: #201a17;
+  position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+.polaroid-caption {
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: center;
+  color: #2b2520;
+  margin-top: 12px;
+  line-height: 1.2;
+}
+
+/* Push Pin */
+.push-pin {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 35% 35%, #ff6b6b, #c92a2a);
+  box-shadow: var(--shadow-pin);
+  z-index: 15;
+}
+
+.push-pin::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+  top: 3px;
+  left: 4px;
+}
+
+/* Paperclip */
+.paperclip {
+  position: absolute;
+  width: 16px;
+  height: 44px;
+  border: 3px solid #8e9aaf;
+  border-radius: 12px;
+  top: -18px;
+  right: 28px;
+  transform: rotate(12deg);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* Stamps */
+.stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 2px dashed var(--stamp-red);
+  color: var(--stamp-red);
+  font-family: var(--font-typewriter);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transform: rotate(var(--rot, -3deg));
+  user-select: none;
+  position: relative;
+  background: rgba(194, 65, 45, 0.04);
+}
+
+.stamp-badge.green {
+  border-color: var(--stamp-green);
+  color: var(--stamp-green);
+  background: rgba(45, 106, 79, 0.04);
+}
+
+/* Stickers */
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sticker);
+  border: 2px solid #ffffff;
+  font-family: var(--font-notes);
+  font-size: 1.05rem;
+  font-weight: 600;
+  transform: rotate(var(--rot, 2deg));
+  transition: transform 0.2s ease, filter 0.2s ease;
+  user-select: none;
+}
+
+.sticker:hover {
+  transform: scale(1.08) rotate(0deg);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.15));
+}
+
+/* Handwritten Notes / Scribbles */
+.handwritten {
+  font-family: var(--font-hand);
+}
+
+.notes-font {
+  font-family: var(--font-notes);
+}
+
+.marker-font {
+  font-family: var(--font-marker);
+}
+
+.typewriter-font {
+  font-family: var(--font-typewriter);
+}
+
+/* Highlighter stroke */
+.highlighter {
+  background: linear-gradient(104deg, rgba(254, 240, 138, 0) 0.9%, rgba(254, 240, 138, 0.85) 2.4%, rgba(254, 240, 138, 0.7) 98%);
+  padding: 0 4px;
+  border-radius: 2px;
+  display: inline;
+}
+
+.highlighter-pink {
+  background: linear-gradient(104deg, rgba(251, 207, 232, 0) 0.9%, rgba(251, 207, 232, 0.85) 2.4%, rgba(251, 207, 232, 0.7) 98%);
+}
+
+.highlighter-mint {
+  background: linear-gradient(104deg, rgba(187, 247, 208, 0) 0.9%, rgba(187, 247, 208, 0.85) 2.4%, rgba(187, 247, 208, 0.7) 98%);
+}
+
+/* Floating interactive sticker bar / doodle animations */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-6px) rotate(calc(var(--rot, 0deg) + 1.5deg)); }
+}
+
+.floating-anim {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+/* Custom Scrollbar for tactile paper feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dfd3be;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a89982;
+  border-radius: 6px;
+  border: 2px solid #dfd3be;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8b7a63;
+}
