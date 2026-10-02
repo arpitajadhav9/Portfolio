@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none">
+  <!-- Outer stamp circle with ink bleed effect -->
+  <circle cx="80" cy="80" r="74" stroke="#8b5cf6" stroke-width="2.5" stroke-dasharray="8 4" opacity="0.85" />
+  <circle cx="80" cy="80" r="64" stroke="#8b5cf6" stroke-width="1.8" opacity="0.9" />
+  
+  <!-- Curving text path -->
+  <path id="circle-path-top" d="M 26 80 A 54 54 0 0 1 134 80" fill="none" />
+  <path id="circle-path-bottom" d="M 134 80 A 54 54 0 0 1 26 80" fill="none" />
+  
+  <text fill="#7c3aed" font-family="'Space Grotesk', monospace, sans-serif" font-size="10.5" font-weight="700" letter-spacing="2.2" opacity="0.9">
+    <textPath href="#circle-path-top" startOffset="50%" text-anchor="middle">
+      ★ MUMBAI • INDIA ★
+    </textPath>
+  </text>
+  
+  <text fill="#7c3aed" font-family="'Space Grotesk', monospace, sans-serif" font-size="9.5" font-weight="700" letter-spacing="2" opacity="0.9">
+    <textPath href="#circle-path-bottom" startOffset="50%" text-anchor="middle">
+      DEV & DESIGN • 2026
+    </textPath>
+  </text>
+  
+  <!-- Center Star & Date -->
+  <g transform="translate(80, 80)" text-anchor="middle">
+    <!-- Star icon -->
+    <path d="M0 -14 L3 -4 L13 -4 L5 2 L8 12 L0 6 L-8 12 L-5 2 L-13 -4 L-3 -4 Z" fill="#7c3aed" opacity="0.95" />
+    <text y="14" fill="#6d28d9" font-family="'Special Elite', monospace" font-size="11" font-weight="700" letter-spacing="1">
+      FIRST CLASS
+    </text>
+  </g>
+  
+  <!-- Wavy postal cancellation lines on the right -->
+  <path d="M 135 60 C 145 55, 150 65, 160 60" stroke="#8b5cf6" stroke-width="1.5" opacity="0.75" />
+  <path d="M 135 75 C 145 70, 150 80, 160 75" stroke="#8b5cf6" stroke-width="1.5" opacity="0.75" />
+  <path d="M 135 90 C 145 85, 150 95, 160 90" stroke="#8b5cf6" stroke-width="1.5" opacity="0.75" />
+  <path d="M 135 105 C 145 100, 150 110, 160 105" stroke="#8b5cf6" stroke-width="1.5" opacity="0.75" />
+</svg>

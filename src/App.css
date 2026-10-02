@@ -1445,69 +1445,129 @@
 }
 
 /* -------------------------------------------------------- */
-/* 1. SPIRAL BINDER NOTEBOOK PAGE (Image 2)                 */
+/* 1. NOTE 1: DECKLE TORN PAPER & PERIWINKLE (Photo 3 Top) */
 /* -------------------------------------------------------- */
-.cutout-spiral-binder {
+.cutout-deckle-paper {
   width: 100%;
 }
 
-.spiral-under-sheet {
+.deckle-backing-sheet {
   position: absolute;
-  inset: -2px -2px -2px -2px;
-  background: #fef08a;
-  border: 2px solid #2b1f14;
-  border-radius: 14px;
-  transform: rotate(-3.5deg) translate(-3px, 2px);
+  inset: -3px -3px -4px -4px;
+  background: #d6e2ee;
+  border-radius: 12px 18px 10px 16px;
+  transform: rotate(-3.2deg) translate(-4px, 3px);
   z-index: 1;
-  box-shadow: 0 4px 14px rgba(45, 30, 15, 0.08);
+  box-shadow: 0 4px 14px rgba(45, 55, 72, 0.08);
+  border: 1px solid rgba(186, 206, 226, 0.7);
 }
 
-.spiral-front-sheet {
+.deckle-front-sheet {
   position: relative;
-  background: #fffef8;
-  border: 2.2px solid #2b1f14;
-  border-radius: 14px;
-  padding: 16px 16px 14px 44px;
+  background: #ffffff;
+  border: 1px solid #ebdccb;
+  border-radius: 10px 16px 8px 14px;
+  padding: 22px 20px 18px 22px;
   z-index: 2;
-  box-shadow: 0 6px 18px rgba(45, 30, 15, 0.08);
+  box-shadow: 0 10px 26px rgba(50, 40, 30, 0.07), 0 2px 6px rgba(50, 40, 30, 0.04);
 }
 
 .cutout-paperclip {
   position: absolute;
   top: -14px;
-  left: 36px;
+  left: 38px;
   z-index: 8;
-  filter: drop-shadow(1px 2px 3px rgba(45, 30, 15, 0.25));
+  filter: drop-shadow(0 2px 3px rgba(45, 30, 15, 0.18));
   pointer-events: none;
 }
 
-.cutout-heart-tab {
-  position: absolute;
-  top: -12px;
-  right: 28px;
-  z-index: 1;
-  background: #f472b6;
-  border: 2px solid #2b1f14;
-  border-radius: 6px 6px 0 0;
-  padding: 1px 8px 3px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+.badge-lavender {
+  background: #ede9fe;
+  color: #6d28d9;
+  border: 1px solid #ddd6fe;
 }
 
-.heart-tab-pill {
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 800;
+.doodle-lavender {
+  color: #7c3aed;
+}
+
+/* -------------------------------------------------------- */
+/* 2. NOTE 2: VINTAGE BRASS CLIPBOARD NOTE (Photo 2 Bottom) */
+/* -------------------------------------------------------- */
+.cutout-clipboard-note {
+  width: 100%;
+  padding-top: 14px;
+}
+
+/* Vintage Brass Clipboard Clamp Header */
+.clipboard-clamp-header {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 110px;
+  pointer-events: none;
+}
+
+.clipboard-brass-img {
+  width: 100%;
+  height: auto;
   display: block;
-  line-height: 1;
 }
 
-/* Spiral binder punched holes along left margin */
-.spiral-holes-spine {
+/* Green Washi Tape with Gold Star on top-right */
+.clipboard-tape-star {
   position: absolute;
-  top: 14px;
-  bottom: 14px;
+  top: 6px;
+  right: 14px;
+  z-index: 11;
+  pointer-events: none;
+}
+
+.clipboard-green-tape {
+  width: 44px;
+  height: 16px;
+  background: rgba(134, 239, 172, 0.78);
+  border: 1px dashed rgba(34, 197, 94, 0.45);
+  transform: rotate(20deg);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.clipboard-star-sticker {
+  position: absolute;
+  top: -3px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 2px 4px rgba(202, 138, 4, 0.4));
+}
+
+/* Main Clipboard Lined Notepad Sheet */
+.clipboard-sheet-body {
+  position: relative;
+  background: #fdfbf5;
+  border: 1px solid #ebdccb;
+  border-radius: 8px 8px 0 0;
+  padding: 24px 18px 24px;
+  box-shadow: 0 10px 26px rgba(50, 35, 20, 0.07), 0 2px 6px rgba(50, 35, 20, 0.04);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 23px,
+    rgba(215, 195, 175, 0.38) 24px
+  );
+  background-size: 100% 24px;
+}
+
+/* Left Margin Punch Holes */
+.clipboard-holes-col {
+  position: absolute;
+  top: 26px;
+  bottom: 24px;
   left: 10px;
-  width: 22px;
+  width: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1515,174 +1575,171 @@
   z-index: 3;
 }
 
-.spiral-notch {
-  position: relative;
-  width: 14px;
-  height: 14px;
-}
-
-.notch-hole {
-  width: 12px;
-  height: 12px;
-  background: #ebd8c3;
-  border: 1.8px solid #2b1f14;
+.clipboard-punch-hole {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
+  background: #eee5d8;
+  box-shadow: inset 0 1px 2px rgba(60, 45, 30, 0.25);
   display: block;
 }
 
-.notch-cut {
-  position: absolute;
-  left: -4px;
-  top: 4px;
-  width: 6px;
-  height: 3px;
-  background: #ebd8c3;
-  border-top: 1.5px solid #2b1f14;
-  border-bottom: 1.5px solid #2b1f14;
+.pl-punch {
+  padding-left: 16px;
 }
 
-/* -------------------------------------------------------- */
-/* 2. TOP-SPIRAL RING PAD WITH WAVY BOTTOM (Image 3)        */
-/* -------------------------------------------------------- */
-.cutout-top-rings {
-  width: 100%;
-}
-
-.top-rings-wire-header {
-  position: relative;
-  width: 100%;
-  height: 32px;
-  z-index: 4;
-}
-
-.top-rings-wire-svg {
-  position: absolute;
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: 36px;
-  z-index: 5;
-  filter: drop-shadow(0 2px 2px rgba(45, 30, 15, 0.2));
-}
-
-.top-rings-pastel-band {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 22px;
-  background: #dbeafe;
-  border-top: 2.2px solid #2b1f14;
-  border-left: 2.2px solid #2b1f14;
-  border-right: 2.2px solid #2b1f14;
-  border-bottom: 2px solid #2b1f14;
-  border-radius: 8px 8px 0 0;
-}
-
-.top-rings-body {
-  position: relative;
-  background: #fffef8;
-  border-left: 2.2px solid #2b1f14;
-  border-right: 2.2px solid #2b1f14;
-  padding: 12px 18px 24px;
-  box-shadow: 0 6px 16px rgba(45, 30, 15, 0.08);
-}
-
-.wavy-bottom-svg {
+.torn-bottom-svg {
   position: absolute;
   bottom: -15px;
-  left: -2px;
-  width: calc(100% + 4px);
+  left: -1px;
+  width: calc(100% + 2px);
   height: 16px;
   z-index: 3;
 }
 
 /* -------------------------------------------------------- */
-/* 3. SCALLOPED WAVY PINK STAMP CARD (Image 4)              */
+/* 3. NOTE 3: BOTANICAL HERBARIUM NOTE (User Photo 4)       */
 /* -------------------------------------------------------- */
-.cutout-scalloped-stamp {
+.cutout-botanical-card {
   width: 100%;
-}
-
-.scalloped-stamp-container {
   position: relative;
-  background: #fdf2f8;
-  border: 4px solid #f472b6;
-  border-radius: 20px;
-  padding: 8px;
-  box-shadow: 0 6px 18px rgba(244, 114, 182, 0.18);
-  outline: 3px dashed #fbcfe8;
-  outline-offset: -7px;
 }
 
-.ruled-lines-bg {
+/* Watercolor Leafy Branch emerging from behind top-left */
+.botanical-branch-under {
+  position: absolute;
+  top: -38px;
+  left: -24px;
+  width: 80px;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  transform: rotate(-10deg);
+  opacity: 0.95;
+}
+
+/* Kraft Paper Washi Tape Strip at top center */
+.kraft-tape-strip {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68px;
+  height: 18px;
+  background: rgba(196, 154, 108, 0.88);
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 8;
+  clip-path: polygon(
+    0% 0%, 100% 0%, 
+    96% 25%, 100% 50%, 96% 75%, 100% 100%, 
+    0% 100%, 
+    4% 75%, 0% 50%, 4% 25%
+  );
+}
+
+/* Cafe Cream Card Body with Double Frame & Ruled Lines */
+.botanical-card-body {
+  position: relative;
+  z-index: 2;
+  background: #fcf8f2;
+  border: 1px solid #dfd3c3;
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow: 0 10px 26px rgba(60, 45, 30, 0.07), 0 2px 6px rgba(50, 35, 20, 0.04);
+}
+
+.botanical-card-inner {
   background: #fffefb;
-  border: 1.5px solid #f9a8d4;
-  border-radius: 12px;
-  padding: 14px 16px;
+  border: 1px solid #ebd9c5;
+  border-radius: 10px;
+  padding: 16px 16px;
+  outline: 1px solid #ebd9c5;
+  outline-offset: -5px;
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0px,
     transparent 23px,
-    #fce7f3 24px
+    rgba(196, 168, 142, 0.22) 24px
   );
   background-size: 100% 24px;
 }
 
-.badge-pink {
-  background: rgba(244, 114, 182, 0.2);
-  color: #db2777;
-}
-
-.doodle-pink {
-  color: #db2777;
-}
-
 /* -------------------------------------------------------- */
-/* 4. SCALLOPED CLOUD-BUBBLE GRID MEMO (Image 5)            */
+/* 4. NOTE 4: RED GINGHAM & WAX SEAL ENVELOPE (Photo 2 Mid) */
 /* -------------------------------------------------------- */
-.cutout-cloud-grid {
+.cutout-gingham-envelope {
   width: 100%;
-}
-
-.cloud-diagonal-tape {
-  position: absolute;
-  top: -8px;
-  left: 20px;
-  width: 64px;
-  height: 20px;
-  background: rgba(147, 197, 253, 0.88);
-  transform: rotate(-32deg);
-  border-radius: 2px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
-  z-index: 8;
-  clip-path: polygon(
-    0% 0%, 100% 0%, 
-    95% 25%, 100% 50%, 95% 75%, 100% 100%, 
-    0% 100%, 
-    5% 75%, 0% 50%, 5% 25%
-  );
-}
-
-.cloud-grid-container {
   position: relative;
-  background: #fffefb;
-  border: 2px solid #93c5fd;
-  border-radius: 22px;
-  padding: 8px;
-  box-shadow: 0 6px 20px rgba(147, 197, 253, 0.25);
-  outline: 3px dotted #60a5fa;
-  outline-offset: -5px;
 }
 
-.math-grid-bg {
-  background-color: #fffefb;
-  border-radius: 14px;
-  padding: 14px 16px;
+/* Woven Red Gingham Fabric Backing */
+.gingham-fabric-backing {
+  position: absolute;
+  inset: -6px -6px -8px -6px;
+  background-color: #fbf7ee;
   background-image: 
-    linear-gradient(rgba(147, 197, 253, 0.35) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(147, 197, 253, 0.35) 1px, transparent 1px);
-  background-size: 18px 18px;
+    linear-gradient(90deg, rgba(225, 29, 72, 0.16) 50%, transparent 50%),
+    linear-gradient(rgba(225, 29, 72, 0.16) 50%, transparent 50%);
+  background-size: 20px 20px;
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  border-radius: 14px;
+  transform: rotate(1.8deg);
+  z-index: 1;
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.08);
+}
+
+/* Kraft Envelope Flap peaking from behind */
+.kraft-envelope-flap {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  right: 20px;
+  height: 34px;
+  background: #e3cca6;
+  border: 1px solid #cdb288;
+  border-radius: 6px;
+  clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Pink Embossed Wax Seal on Top-Left */
+.envelope-wax-seal {
+  position: absolute;
+  top: -14px;
+  left: -10px;
+  width: 48px;
+  height: 48px;
+  z-index: 10;
+  filter: drop-shadow(0 3px 6px rgba(159, 18, 57, 0.28));
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cutout-gingham-envelope:hover .envelope-wax-seal {
+  transform: scale(1.1) rotate(-8deg);
+}
+
+/* Cream Linen Letter Card */
+.gingham-letter-card {
+  position: relative;
+  z-index: 3;
+  background: #fffefb;
+  border: 1px solid #ebdccb;
+  border-radius: 12px;
+  padding: 20px 18px 18px;
+  box-shadow: 0 10px 26px rgba(50, 35, 20, 0.08);
+}
+
+.badge-rose {
+  background: #ffe4e6;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+}
+
+.doodle-rose {
+  color: #e11d48;
 }
 
 /* Canvas Note Badges */
@@ -1698,10 +1755,10 @@
   margin-bottom: 6px;
 }
 
-.badge-yellow { background: rgba(234, 179, 8, 0.18); color: #b45309; }
-.badge-peach { background: rgba(249, 115, 22, 0.18); color: #c2410c; }
-.badge-mint { background: rgba(16, 185, 129, 0.18); color: #047857; }
-.badge-sky { background: rgba(14, 165, 233, 0.18); color: #0284c7; }
+.badge-yellow { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.badge-peach { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+.badge-mint { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+.badge-sky { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
 
 .canvas-note-title {
   font-family: 'Patrick Hand', 'Caveat', cursive, sans-serif;
@@ -1715,7 +1772,7 @@
 .canvas-note-desc {
   font-family: 'Space Grotesk', var(--font-sans);
   font-size: 0.88rem;
-  color: #52473c;
+  color: #5c4e42;
   margin: 0 0 8px;
   line-height: 1.45;
 }
@@ -1737,7 +1794,7 @@
 .doodle-sky { color: #0284c7; }
 
 /* ======================================================== */
-/* CENTER COLUMN: COMPACT INTERACTIVE PHOTO ACCORDION STACK  */
+/* CENTER COLUMN: UPGRADED AESTHETIC PHOTO ACCORDION STACK   */
 /* ======================================================== */
 .about-canvas-center {
   position: relative;
@@ -1750,12 +1807,12 @@
 
 .accordion-strip-container {
   display: flex;
-  gap: 6px;
-  height: 385px; /* Compact & cozy size as requested */
+  gap: 7px;
+  height: 420px; /* Spacious, elegant photo height */
   width: 100%;
-  max-width: 420px; /* Reduced width so stack doesn't take too much space */
+  max-width: 460px; /* Generous focus for rich photos */
   align-items: stretch;
-  border-radius: 20px;
+  border-radius: 22px;
   position: relative;
 }
 
@@ -1765,37 +1822,39 @@
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(45, 30, 15, 0.1);
+  box-shadow: 0 8px 24px rgba(45, 30, 15, 0.1);
   transition: flex 0.55s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
-  background: #2b1f14;
+  background: #38291c;
   box-sizing: border-box;
 }
 
-/* Decreased Collapsed Stack Size (Very slender, compact width bookmark) */
+/* Collapsed Stack Panel (Warm, clear photo slice bookmark) */
 .accordion-photo-panel.is-collapsed {
-  flex: 0.14;
-  min-width: 18px;
-  max-width: 24px;
-  border-radius: 10px;
-  filter: brightness(0.7) saturate(0.85);
+  flex: 0.18;
+  min-width: 22px;
+  max-width: 32px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  filter: brightness(0.92) saturate(0.98);
 }
 
 .accordion-photo-panel.is-collapsed:hover {
-  flex: 0.45;
-  max-width: 40px;
-  filter: brightness(0.92);
-  transform: translateY(-2px);
+  flex: 0.6;
+  max-width: 48px;
+  filter: brightness(1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(45, 30, 15, 0.16);
 }
 
-/* Expanded state (Generous Focus Photo with Crisp Polaroid Border) */
+/* Expanded state (Crisp Polaroid Frame with rich depth) */
 .accordion-photo-panel.is-expanded {
-  flex: 5.5;
-  min-width: 230px;
+  flex: 6;
+  min-width: 270px;
   border-radius: 18px;
-  border: 4px solid #ffffff;
+  border: 6px solid #ffffff;
   filter: brightness(1) saturate(1.02);
-  box-shadow: 0 16px 36px rgba(45, 30, 15, 0.18);
+  box-shadow: 0 18px 42px rgba(45, 30, 15, 0.18), 0 2px 8px rgba(45, 30, 15, 0.06);
   transform: translateY(-2px);
 }
 
@@ -1805,11 +1864,11 @@
   top: -2px;
   left: 50%;
   transform: translateX(-50%) rotate(-1deg);
-  width: 44px;
+  width: 48px;
   height: 15px;
-  background: rgba(255, 241, 230, 0.88);
+  background: rgba(255, 241, 230, 0.9);
   border-radius: 2px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
   z-index: 6;
   pointer-events: none;
   backdrop-filter: blur(2px);
@@ -1830,7 +1889,7 @@
   pointer-events: none;
 }
 
-/* Vertical indicator for collapsed panels (Neat & Slender) */
+/* Vertical indicator for collapsed panels */
 .accordion-vertical-label {
   position: absolute;
   bottom: 12px;
@@ -1847,25 +1906,25 @@
   font-family: 'Space Grotesk', var(--font-sans);
   font-size: 0.65rem;
   font-weight: 700;
-  color: #ffffff;
-  background: rgba(43, 31, 20, 0.75);
-  padding: 2px 4px;
+  color: #2b1f14;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 5px;
   border-radius: 6px;
   backdrop-filter: blur(4px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
 }
 
-/* Expanded Caption Overlay (Atishya Gupta style) */
+/* Expanded Caption Overlay */
 .accordion-caption-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 36px 18px 16px;
+  padding: 26px 16px 14px;
   background: linear-gradient(
     to top,
-    rgba(20, 15, 12, 0.92) 0%,
-    rgba(20, 15, 12, 0.6) 55%,
+    rgba(20, 14, 10, 0.88) 0%,
+    rgba(20, 14, 10, 0.4) 65%,
     transparent 100%
   );
   z-index: 5;
@@ -1874,29 +1933,30 @@
   flex-direction: column;
   gap: 4px;
   pointer-events: none;
+  backdrop-filter: blur(1.5px);
 }
 
 .caption-tag-pill {
   display: inline-block;
   align-self: flex-start;
-  background: #f43f5e;
+  background: #e11d48;
   color: #ffffff;
   font-family: 'Space Grotesk', var(--font-sans);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 2px 8px;
   border-radius: 9999px;
-  box-shadow: 0 2px 6px rgba(244, 63, 94, 0.35);
+  box-shadow: 0 2px 6px rgba(225, 29, 72, 0.35);
 }
 
 .caption-text {
   font-family: 'Patrick Hand', 'Caveat', cursive, sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   color: #ffffff;
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.28;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -1982,18 +2042,7 @@
   transform: rotate(8deg) scale(1.12) translateY(-3px) !important;
 }
 
-/* 4. Cozy Chai Cup Sticker (On Note 2 header: Chai memories) */
-.sticker-chai-cup {
-  top: -12px;
-  left: 18px;
-  width: 44px;
-  height: auto;
-  transform: rotate(-10deg);
-}
 
-.sticker-chai-cup:hover {
-  transform: rotate(-5deg) scale(1.15) translateY(-3px) !important;
-}
 
 /* 5. Vintage Air Mail Postage Stamp (On Note 1: Spiral Binder) */
 .sticker-airmail-stamp {
@@ -2259,10 +2308,7 @@
     bottom: -18px;
   }
 
-  .sticker-chai-cup {
-    width: 38px;
-    left: 10px;
-  }
+
 
   .sticker-airmail-stamp {
     width: 38px;
@@ -4276,6 +4322,1039 @@
     gap: 20px;
   }
 }
+
+/* ======================================================== */
+/* SEC. 05: THE SCRAPBOOK FINALE & CONTACT SANCTUARY (FOOTER) */
+/* ======================================================== */
+.scrapbook-footer {
+  position: relative;
+  width: 100%;
+  background: #fbf8f2;
+  background-image: radial-gradient(#e5dac7 1px, transparent 1px);
+  background-size: 26px 26px;
+  padding: 0 0 56px 0;
+  margin-top: 64px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 1. Scalloped Paper Arch Divider Trim */
+.footer-scallop-divider {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.footer-scallop-divider svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.footer-inner-wrapper {
+  position: relative;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 32px;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* Giant Soft Typography Watermark in Background (from Image 2 Diya Patel) */
+.footer-bg-watermark {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Syne', 'Outfit', sans-serif;
+  font-size: clamp(4.5rem, 11.5vw, 10.5rem);
+  font-weight: 800;
+  color: #dfd0b7;
+  opacity: 0.22;
+  white-space: nowrap;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+/* 2. Header & Conversational Invitation Container (Directly on canvas - NO separate card!) */
+.footer-header-cluster {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto 48px auto;
+  text-align: center;
+  z-index: 2;
+  padding: 0 16px;
+}
+
+/* Vintage Newspaper Cutouts at Outer Corners of the Container */
+.footer-corner-cutout {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Above: Top-Left Corner Cutout */
+.footer-corner-cutout.cutout-above {
+  top: -8px;
+  left: 12px;
+  transform: rotate(-8deg);
+}
+
+.footer-corner-cutout.cutout-above .corner-newspaper-img {
+  width: 160px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(3px 8px 18px rgba(60, 35, 15, 0.16));
+}
+
+/* Below: Bottom-Right Corner Cutout */
+.footer-corner-cutout.cutout-below {
+  bottom: 24px;
+  right: 12px;
+  transform: rotate(6.5deg);
+}
+
+.footer-corner-cutout.cutout-below .corner-newspaper-img {
+  width: 170px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(3px 8px 18px rgba(60, 35, 15, 0.16));
+}
+
+/* Authentic Translucent Washi Tape on Cutouts */
+.corner-washi-tape {
+  position: absolute;
+  width: 54px;
+  height: 18px;
+  background: rgba(254, 215, 170, 0.78);
+  border: 1px dashed rgba(234, 88, 12, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  z-index: 3;
+}
+
+.corner-washi-tape.tape-top {
+  top: -7px;
+  left: 24px;
+  transform: rotate(4deg);
+}
+
+.corner-washi-tape.tape-bottom {
+  bottom: -7px;
+  right: 28px;
+  transform: rotate(-3deg);
+}
+
+@media (max-width: 1100px) {
+  .footer-corner-cutout.cutout-above {
+    left: 0;
+    top: -5px;
+  }
+  .footer-corner-cutout.cutout-above .corner-newspaper-img {
+    width: 130px;
+  }
+  .footer-corner-cutout.cutout-below {
+    right: 0;
+    bottom: 20px;
+  }
+  .footer-corner-cutout.cutout-below .corner-newspaper-img {
+    width: 135px;
+  }
+}
+
+@media (max-width: 860px) {
+  .footer-corner-cutout.cutout-above .corner-newspaper-img {
+    width: 105px;
+    opacity: 0.85;
+  }
+  .footer-corner-cutout.cutout-below .corner-newspaper-img {
+    width: 110px;
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 680px) {
+  .footer-corner-cutout {
+    display: none;
+  }
+}
+
+.footer-eyebrow-script {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #c2410c;
+  margin-bottom: 8px;
+}
+
+.footer-sparkle-doodle {
+  color: #f59e0b;
+  font-size: 1.25rem;
+  animation: doodle-spin 4s ease-in-out infinite;
+}
+
+.footer-main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+  font-weight: 800;
+  color: #2b1f14;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  margin: 0 0 16px 0;
+}
+
+.footer-main-title .script-highlight {
+  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  color: #ea580c;
+  text-decoration: underline wavy #fed7aa;
+  text-underline-offset: 6px;
+}
+
+.footer-tagline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.62;
+  color: #645547;
+  max-width: 620px;
+  margin: 0 auto 20px auto;
+}
+
+.footer-availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #ebdccb;
+  padding: 8px 20px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(80, 50, 20, 0.05);
+  font-family: 'Space Grotesk', monospace, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #443526;
+}
+
+.live-pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-ring 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  flex-shrink: 0;
+}
+
+/* 3. The Main Scrapbook Desk Composition: Side-by-Side Asymmetric Stationery Showcase */
+.footer-desk-composition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+/* Watercolor Coffee Ring Watermark on desk paper */
+.desk-coffee-stain {
+  position: absolute;
+  top: -24px;
+  left: 60px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3.5px solid rgba(138, 90, 50, 0.14);
+  box-shadow: inset 0 0 16px rgba(138, 90, 50, 0.08), 0 0 10px rgba(138, 90, 50, 0.05);
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(-18deg);
+}
+
+/* ======================================================== */
+/* OBJECT 1 (LEFT): Compact Archival Photo Specimen Tag */
+/* ======================================================== */
+.footer-photo-specimen-card {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  flex-shrink: 0;
+  background: #fbf6ec;
+  background-image: 
+    linear-gradient(rgba(251, 246, 236, 0.94), rgba(251, 246, 236, 0.94)),
+    radial-gradient(#d8c9b4 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 16px 16px;
+  /* Distinct Chamfered Tag Shape: Clipped 45-degree top corners */
+  clip-path: polygon(26px 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%, 0 26px);
+  border: 1.5px solid #ded0ba;
+  box-shadow: 0 14px 34px rgba(60, 42, 22, 0.1), 0 2px 8px rgba(60, 42, 22, 0.04);
+  transform: rotate(var(--card-tilt, -3deg));
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  padding: 30px 20px 20px 20px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.footer-photo-specimen-card:hover {
+  transform: rotate(-1deg) translateY(-2px);
+  box-shadow: 0 20px 42px rgba(60, 42, 22, 0.15);
+}
+
+/* Tag Twine Loop at Top */
+.specimen-tag-twine {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 22px;
+  border: 2.2px solid #b45309;
+  border-radius: 50% 50% 0 0;
+  border-bottom: none;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Brass Grommet / Eyelet Hole */
+.specimen-tag-grommet {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fbf6ec;
+  border: 2.5px solid #d97706;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+  z-index: 4;
+}
+
+/* Vintage Curved Brass Bulldog Clip */
+.specimen-brass-clamp {
+  position: absolute;
+  top: 8px;
+  left: 36px;
+  width: 62px;
+  height: auto;
+  z-index: 12;
+  pointer-events: none;
+  filter: drop-shadow(2px 3px 5px rgba(60, 30, 10, 0.32));
+  transform: rotate(-6deg);
+}
+
+/* Purple Ink Cancellation Stamp on Specimen Tag */
+.specimen-postmark-stamp {
+  position: absolute;
+  bottom: 30px;
+  right: -14px;
+  width: 95px;
+  height: 95px;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0.82;
+  transform: rotate(8deg);
+  mix-blend-mode: multiply;
+}
+
+.specimen-tag-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.specimen-tag-kicker {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #9c8a77;
+}
+
+.specimen-status-tag {
+  color: #c2410c;
+  background: #ffedd5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 800;
+}
+
+/* Polaroid Photo Frame */
+.specimen-polaroid-frame {
+  width: 100%;
+  background: #ffffff;
+  padding: 8px 8px 12px 8px;
+  border-radius: 3px;
+  border: 1px solid #ebdccb;
+  box-shadow: 0 6px 18px rgba(60, 40, 20, 0.1);
+  text-align: center;
+  box-sizing: border-box;
+  transform: rotate(-1deg);
+  transition: transform 0.25s ease;
+}
+
+.footer-photo-specimen-card:hover .specimen-polaroid-frame {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.specimen-portrait-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 2px;
+  display: block;
+}
+
+.specimen-polaroid-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.specimen-name {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2b1f14;
+  line-height: 1.1;
+}
+
+.specimen-sub {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #ea580c;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+/* Shortened Concise Punchy Bio */
+.specimen-bio-note {
+  width: 100%;
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px dashed #d6c4aa;
+  border-radius: 6px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+}
+
+.specimen-bio-quote {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #443526;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Bottom Conversation Memo */
+.specimen-footer-memo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px dashed #d6c4aa;
+}
+
+.specimen-memo-text {
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #785a3c;
+}
+
+.specimen-teacup-sticker {
+  width: 38px;
+  height: auto;
+  transform: rotate(-6deg);
+  filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.14));
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.specimen-teacup-sticker:hover {
+  transform: rotate(0deg) scale(1.18);
+}
+
+/* ======================================================== */
+/* OBJECT 2 (RIGHT): The Hero Conversation & Mail Station */
+/* ======================================================== */
+.footer-terracotta-envelope {
+  position: relative;
+  width: 540px;
+  max-width: 100%;
+  background: #bf533b;
+  background-image: 
+    linear-gradient(rgba(191, 83, 59, 0.96), rgba(191, 83, 59, 0.96)),
+    radial-gradient(#e07a63 1px, transparent 1px);
+  background-size: 100% 100%, 16px 16px;
+  border-radius: 12px;
+  border: 1.5px solid #a3412b;
+  padding: 18px 16px 16px 16px;
+  box-shadow: 0 16px 42px rgba(90, 30, 15, 0.18), 0 3px 10px rgba(90, 30, 15, 0.08);
+  transform: rotate(var(--envelope-tilt, 1.5deg));
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.footer-terracotta-envelope:hover {
+  transform: rotate(0.5deg) translateY(-2px);
+  box-shadow: 0 22px 50px rgba(90, 30, 15, 0.24);
+}
+
+/* Stitched perimeter line */
+.envelope-stitching {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 9px;
+  pointer-events: none;
+}
+
+/* Woven Triangular Envelope Flap */
+.envelope-v-flap {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 18px;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+}
+
+/* Pink Embossed Wax Seal Badge on top-left */
+.envelope-wax-seal-badge {
+  position: absolute;
+  top: -16px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(1px 3px 6px rgba(0, 0, 0, 0.28));
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Letter Sheet peeking from envelope pocket */
+.envelope-letter-sheet {
+  background: #fffefc;
+  border-radius: 8px;
+  border: 1px solid #ebdccb;
+  padding: 22px 24px 20px 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.letter-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.letter-stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ea580c;
+  background: #ffedd5;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+.letter-confidential-tag {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #9c8a77;
+  letter-spacing: 0.06em;
+}
+
+.letter-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: #2b1f14;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+.letter-subline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.86rem;
+  color: #645547;
+  line-height: 1.45;
+  margin: 0 0 16px 0;
+}
+
+/* One-Click Copy Email Ribbon */
+.letter-email-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fdfbf7;
+  border: 1.5px solid #ebdccb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.letter-email-ribbon:hover {
+  background: #fff7ed;
+  border-color: #ea580c;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.14);
+}
+
+.email-ribbon-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.email-envelope-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #ffedd5;
+  color: #ea580c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.letter-email-text {
+  font-family: 'Space Grotesk', monospace, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e1b18;
+  letter-spacing: -0.01em;
+}
+
+.letter-copy-btn {
+  background: #ffffff;
+  border: 1px solid #ebdccb;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #645547;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.letter-copy-btn:hover {
+  background: #2b1f14;
+  color: #ffffff;
+  border-color: #2b1f14;
+}
+
+.letter-copied-pill {
+  color: #059669;
+  font-weight: 700;
+}
+
+/* Action CTA Buttons */
+.letter-actions-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.letter-primary-btn {
+  flex: 1.3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #2b1f14;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.letter-primary-btn:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.28);
+}
+
+.letter-resume-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #fbf7ee;
+  border: 1px solid #ebdccb;
+  color: #443526;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.letter-resume-btn:hover {
+  background: #ffffff;
+  border-color: #c29d70;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(60, 40, 20, 0.08);
+}
+
+/* Live Status Footer inside Letter */
+.letter-status-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px dashed #ebdccb;
+}
+
+.live-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-ring 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  flex-shrink: 0;
+}
+
+.status-footer-text {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #065f46;
+}
+
+/* Olive Green Thank You Label Sticker */
+.envelope-thankyou-sticker {
+  position: absolute;
+  top: -18px;
+  right: 36px;
+  width: 76px;
+  height: auto;
+  z-index: 8;
+  transform: rotate(3deg);
+  filter: drop-shadow(1px 3px 6px rgba(0, 0, 0, 0.16));
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.envelope-thankyou-sticker:hover {
+  transform: rotate(0deg) scale(1.12);
+}
+
+/* Ruby Jewel Heart Paperclip */
+.letter-ruby-clip {
+  position: absolute;
+  top: -14px;
+  right: 24px;
+  width: 32px;
+  height: auto;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.24));
+  transform: rotate(10deg);
+  transition: transform 0.2s ease;
+}
+
+/* Silk Ribbon Bow Decor on bottom-right of envelope */
+.envelope-ribbon-decor {
+  position: absolute;
+  bottom: -16px;
+  right: -14px;
+  width: 52px;
+  height: auto;
+  transform: rotate(-6deg);
+  filter: drop-shadow(2px 3px 6px rgba(0, 0, 0, 0.16));
+  z-index: 8;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.envelope-ribbon-decor:hover {
+  transform: rotate(2deg) scale(1.18) translateY(-2px);
+}
+
+/* ======================================================== */
+/* 4. Quick Page Navigation & Social Pills Bar (Strictly ONE Line on Desktop!) */
+/* ======================================================== */
+.footer-quick-links-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: #ffffff;
+  border: 1px solid #ebdccb;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(50, 30, 15, 0.04);
+  margin-bottom: 26px;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+}
+
+.footer-nav-col,
+.footer-social-col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.nav-row-title {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #9c8a77;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.pages-pills-list,
+.social-pills-list {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer-nav-pill {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #554433;
+  background: #fbf7ee;
+  padding: 5px 11px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid #ebdccb;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.footer-nav-pill:hover,
+.footer-nav-pill.active {
+  background: #2b1f14;
+  color: #ffffff;
+  border-color: #2b1f14;
+}
+
+.footer-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Space Grotesk', monospace, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #3b2d1f;
+  background: #fff8f0;
+  border: 1px solid #fed7aa;
+  padding: 5px 9px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.footer-social-pill:hover {
+  background: #ea580c;
+  color: #ffffff;
+  border-color: #ea580c;
+  transform: translateY(-1px);
+}
+
+.footer-scroll-top-col {
+  flex-shrink: 0;
+}
+
+.scroll-to-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #2b1f14;
+  color: #ffffff;
+  border: 1px solid #2b1f14;
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(43, 31, 20, 0.15);
+  transition: all 0.2s ease;
+}
+
+.scroll-to-top-btn:hover {
+  background: #ea580c;
+  border-color: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+}
+
+.arrow-up-icon {
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.scroll-btn-label {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* 5. Bottom Colophon & Typewriter Timestamp */
+.footer-bottom-colophon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed #ebdccb;
+  padding-top: 18px;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.colophon-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.colophon-copyright {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #4b3826;
+}
+
+.colophon-sub {
+  font-family: 'Patrick Hand', 'Caveat', cursive, sans-serif;
+  font-size: 0.98rem;
+  color: #8c735d;
+}
+
+.colophon-timestamp {
+  font-family: 'Special Elite', monospace, sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  color: #7b6957;
+  background: #f5eedf;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Keyframes */
+@keyframes spin-cassette {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes eq-bounce {
+  0% {
+    height: 4px;
+  }
+  100% {
+    height: 16px;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 960px) {
+  .footer-desk-composition {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .footer-quick-links-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .footer-bottom-colophon {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .footer-bg-watermark {
+    font-size: clamp(3.5rem, 14vw, 6rem);
+    bottom: 120px;
+  }
+}
+
 
 
 

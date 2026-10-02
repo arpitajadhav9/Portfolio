@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40" width="100" height="40" fill="none">
+  <!-- Barcode vertical lines of varying widths -->
+  <rect x="2" y="2" width="3" height="30" fill="#332418" />
+  <rect x="7" y="2" width="2" height="30" fill="#332418" />
+  <rect x="11" y="2" width="4" height="30" fill="#332418" />
+  <rect x="18" y="2" width="1.5" height="30" fill="#332418" />
+  <rect x="22" y="2" width="3" height="30" fill="#332418" />
+  <rect x="27" y="2" width="1" height="30" fill="#332418" />
+  <rect x="30" y="2" width="5" height="30" fill="#332418" />
+  <rect x="38" y="2" width="2" height="30" fill="#332418" />
+  <rect x="42" y="2" width="3" height="30" fill="#332418" />
+  <rect x="48" y="2" width="1.5" height="30" fill="#332418" />
+  <rect x="52" y="2" width="4" height="30" fill="#332418" />
+  <rect x="58" y="2" width="2" height="30" fill="#332418" />
+  <rect x="62" y="2" width="1.5" height="30" fill="#332418" />
+  <rect x="66" y="2" width="3" height="30" fill="#332418" />
+  <rect x="71" y="2" width="4.5" height="30" fill="#332418" />
+  <rect x="78" y="2" width="2" height="30" fill="#332418" />
+  <rect x="82" y="2" width="1.5" height="30" fill="#332418" />
+  <rect x="86" y="2" width="3" height="30" fill="#332418" />
+  <rect x="91" y="2" width="2" height="30" fill="#332418" />
+  <rect x="95" y="2" width="3" height="30" fill="#332418" />
+  
+  <text x="50" y="38" font-family="'Space Grotesk', monospace" font-size="6.5" font-weight="700" fill="#523d2b" text-anchor="middle" letter-spacing="1.5">
+    * ARPITA-2026-DEV *
+  </text>
+</svg>

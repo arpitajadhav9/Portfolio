@@ -268,55 +268,52 @@ const skillCategoriesData = [
   }
 ];
 
-// Arpita's Beyond-Work & Life Snapshots (Interactive Accordion Strip)
+// Arpita's Curated Life & Craft Snapshots (Interactive Accordion Strip)
 const aboutPhotosData = [
   {
-    id: 'workspace',
-    src: '/portrait.jpg',
-    title: 'Workspace & Design Systems',
-    shortTitle: 'Desk & Code',
-    category: 'Work & Craft',
-    caption: 'Desk setup • crafting clean design systems & code with intention'
+    id: 'mumbai-tech-week',
+    src: '/about/mumbai-tech-week.jpg',
+    title: 'Mumbai Tech Week',
+    shortTitle: 'Tech Summit',
+    category: 'Community & Tech',
+    caption: 'Mumbai Tech Week • immersing in frontier tech, systems & developer dialogue ✦',
+    objectPosition: 'center 22%'
   },
   {
-    id: 'sketchbook',
-    src: '/about-journal.jpg',
-    title: 'Travel & Food Sketchbook',
-    shortTitle: 'Sketchbook',
-    category: 'Creativity',
-    caption: 'Travel & food sketchbook • ramen, matcha & quiet cafe journaling'
+    id: 'presenting',
+    src: '/about/presentation-lead.jpg',
+    title: 'Technical Presentation & Sprints',
+    shortTitle: 'Speaking',
+    category: 'Leadership & Craft',
+    caption: 'Pitching technical architectures & walking through user flows in sprint reviews 🎙️',
+    objectPosition: 'center 20%'
   },
   {
-    id: 'travel',
-    src: '/about-travel.jpg',
-    title: 'Wanderlust & Old Alleys',
-    shortTitle: 'Wanderlust',
-    category: 'Explorations',
-    caption: 'Wandering cobblestone alleys • finding quiet architecture & stories'
+    id: 'dance-stage',
+    src: '/about/dance-performance.jpg',
+    title: 'Classical & Expressive Dance',
+    shortTitle: 'Stage Dance',
+    category: 'Creative Artistry',
+    caption: 'Performing at U Fest 2025 • years of rhythm, discipline & expressive storytelling 🩰',
+    objectPosition: 'center 35%'
   },
   {
-    id: 'chai-corner',
-    src: '/about-cafe.jpg',
-    title: 'Chai & Quiet Mornings',
-    shortTitle: 'Chai Ritual',
+    id: 'mountain-valley',
+    src: '/about/mountain-retreat.jpg',
+    title: 'Snow Peaks & Serene Rivers',
+    shortTitle: 'Mountains',
+    category: 'Wanderlust',
+    caption: 'Quiet mountain valleys & snowscapes • finding calm and fresh perspective 🏔️',
+    objectPosition: 'center center'
+  },
+  {
+    id: 'cafe-treats',
+    src: '/about/cafe-patisserie.jpg',
+    title: 'Cafe Hopping & Quiet Mornings',
+    shortTitle: 'Cafe Rituals',
     category: 'Daily Ritual',
-    caption: 'Autumn window & steaming masala chai • morning sketchpad sessions'
-  },
-  {
-    id: 'building-sprint',
-    src: '/about-building.jpg',
-    title: 'Collaborative Sprinting',
-    shortTitle: 'Sprint Days',
-    category: 'Collaboration',
-    caption: 'Brainstorming sprints • whiteboard wireframes & happy team chaos'
-  },
-  {
-    id: 'nature-walk',
-    src: '/about-nature.jpg',
-    title: 'Sunday Botanicals & Picnics',
-    shortTitle: 'Off the Grid',
-    category: 'Recharge',
-    caption: 'Sunny park picnics • fresh wildflowers, film cameras & calm'
+    caption: 'Dark chocolate cake, quiet corner sketch sessions & warm cozy cafes ✨',
+    objectPosition: 'center 60%'
   }
 ];
 
@@ -330,6 +327,52 @@ export default function App() {
   const heroRef = React.useRef(null);
   const skillsRef = React.useRef(null);
   const deskRef = React.useRef(null);
+
+  // Footer Interactive Desk Status Switcher (from User Feedback: Replaces song with personal dispatch)
+  const footerStatuses = [
+    {
+      kicker: "CURRENT CRAFT & FOCUS",
+      text: "Architecting AI agent workflows & tactile web apps with pixel precision ✦",
+      icon: "✨",
+      tag: "Active Project"
+    },
+    {
+      kicker: "LOCATION & TIMEZONE",
+      text: "Based in Mumbai, India (IST • UTC+5:30) • Open for Remote & Relocation",
+      icon: "📍",
+      tag: "Available 2026"
+    },
+    {
+      kicker: "DAILY FUEL & RITUAL",
+      text: "Lo-fi beats, chronic doodling, clean code & zero-to-one engineering ✨",
+      icon: "🎧",
+      tag: "Daily Rhythm"
+    }
+  ];
+  const [footerStatusIdx, setFooterStatusIdx] = useState(0);
+  const handleCycleFooterStatus = () => {
+    setFooterStatusIdx((prev) => (prev + 1) % footerStatuses.length);
+  };
+
+  // Footer Email 1-Click Copy State
+  const [emailCopied, setEmailCopied] = useState(false);
+  const handleCopyEmail = (e) => {
+    e?.stopPropagation?.();
+    navigator.clipboard.writeText('arpitajadhav9@gmail.com');
+    setEmailCopied(true);
+    confetti({
+      particleCount: 28,
+      spread: 60,
+      origin: { y: 0.85 },
+      colors: ['#ec4899', '#fde047', '#38bdf8', '#a855f7']
+    });
+    setTimeout(() => setEmailCopied(false), 2600);
+  };
+
+  // Scroll to Top Handler
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Scroll-triggered tilt and reveal for Skills Pencil Pouch & Sticky Notes
   useEffect(() => {
@@ -939,10 +982,6 @@ export default function App() {
         <section id="about" className="scrapbook-about-section">
           {/* Centered Editorial Header */}
           <div className="about-header-centered">
-            <div className="about-chapter-badge">
-              <span className="specimen-tag-text">CHAPTER // 01 • BEYOND THE PIXELS</span>
-            </div>
-
             <h2 className="about-section-title">
               About <span className="about-me-script">me</span>
               <span className="about-doodle-sparkle">✦</span>
@@ -953,16 +992,31 @@ export default function App() {
             </p>
           </div>
 
-          {/* Scrapbook Canvas: 4 Distinct Stationery Cutouts around Center Photo Stack */}
+          {/* Scrapbook Canvas: 4 Distinct Stationery Designs directly inspired by User's Photos */}
           <div className="about-scrapbook-canvas">
             {/* Left Flank Notes */}
             <div className="about-canvas-flank flank-left">
-              {/* Note 1: Spiral Binder Notebook Page with Paper Clip & Pink Heart Tab (Image 2) */}
-              <div className="scrapbook-cutout-card cutout-spiral-binder" style={{ '--cutout-tilt': '-2.2deg' }}>
-                {/* Yellow Backing Sheet with offset angle */}
-                <div className="spiral-under-sheet" aria-hidden="true" />
+              {/* Note 1: Torn Deckle Paper with Periwinkle Backing Sheet & Metallic Clip (User Photo 3 Top) */}
+              <div className="scrapbook-cutout-card cutout-deckle-paper" style={{ '--cutout-tilt': '-2.2deg' }}>
+                {/* Periwinkle/Lavender Torn Backing Sheet peaking behind */}
+                <div className="deckle-backing-sheet" aria-hidden="true" />
 
-                {/* Vintage Air Mail Stamp Sticker */}
+                {/* Silver Metallic Paperclip at top */}
+                <div className="cutout-paperclip" aria-hidden="true" title="Paperclipped">
+                  <svg width="24" height="40" viewBox="0 0 24 42" fill="none">
+                    <defs>
+                      <linearGradient id="silver-clip-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#94a3b8" />
+                        <stop offset="45%" stopColor="#e2e8f0" />
+                        <stop offset="100%" stopColor="#64748b" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M7 14 V32 C7 36 17 36 17 32 V8 C17 3 4 3 4 8 V35 C4 41 20 41 20 35 V14" 
+                          stroke="url(#silver-clip-grad)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                {/* Vintage Air Mail Postage Stamp */}
                 <img 
                   src="/stickers/sticker-stamp.svg" 
                   alt="Vintage postage stamp sticker" 
@@ -970,56 +1024,35 @@ export default function App() {
                   title="Air mail postage stamp"
                 />
 
-                {/* Main Front Spiral Notepad Sheet */}
-                <div className="spiral-front-sheet">
-                  {/* Paperclip on top-left */}
-                  <div className="cutout-paperclip" aria-hidden="true" title="Paperclipped">
-                    <svg width="22" height="38" viewBox="0 0 24 42" fill="none">
-                      <path d="M7 14 V32 C7 36 17 36 17 32 V8 C17 3 4 3 4 8 V35 C4 41 20 41 20 35 V14" 
-                            stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-
-                  {/* Pink Heart Tab peaking on top-right */}
-                  <div className="cutout-heart-tab" aria-hidden="true">
-                    <span className="heart-tab-pill">♥</span>
-                  </div>
-
-                  {/* Left Spiral Binder Cutout Spine */}
-                  <div className="spiral-holes-spine" aria-hidden="true">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="spiral-notch">
-                        <span className="notch-hole" />
-                        <span className="notch-cut" />
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Note Content */}
-                  <div className="cutout-sheet-content pl-spiral">
-                    <span className="canvas-badge badge-yellow">DEV & DESIGN</span>
+                {/* Main Front Torn Deckle Sheet */}
+                <div className="deckle-front-sheet">
+                  <div className="cutout-sheet-content">
+                    <span className="canvas-badge badge-lavender">DEV & DESIGN</span>
                     <h3 className="canvas-note-title">"I speak both 'Developer' & 'Designer' fluently."</h3>
                     <p className="canvas-note-desc">
                       Bridging scalable React & Python systems with pixel-crafted Figma components and intuitive UX.
                     </p>
                     <div className="canvas-note-footer">
-                      <span className="footer-doodle doodle-yellow">✦ 0 errors • 100% craft</span>
+                      <span className="footer-doodle doodle-lavender">✦ 0 errors • 100% craft</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Note 2: Top-Spiral Ring Pad with Pastel Header & Wavy Bottom (Image 3) */}
-              <div className="scrapbook-cutout-card cutout-top-rings" style={{ '--cutout-tilt': '1.8deg' }}>
-                {/* Cozy Chai Cup Sticker */}
-                <img 
-                  src="/stickers/sticker-coffee.svg" 
-                  alt="Chai cup sticker" 
-                  className="about-decor-sticker sticker-chai-cup"
-                  title="Chai lover ☕"
-                />
+              {/* Note 2: Vintage Brass Clipboard Note with Torn Lined Paper & Gold Star (User Photo 2 Bottom) */}
+              <div className="scrapbook-cutout-card cutout-clipboard-note" style={{ '--cutout-tilt': '1.8deg' }}>
+                {/* Vintage Brass Clipboard Clamp Header */}
+                <div className="clipboard-clamp-header" aria-hidden="true">
+                  <img src="/stickers/brass-clip.svg" alt="Brass clipboard clamp" className="clipboard-brass-img" />
+                </div>
 
-                {/* French Fries Carton Sticker (User uploaded) */}
+                {/* Green Washi Tape with Gold Star pinned on top-right */}
+                <div className="clipboard-tape-star" aria-hidden="true">
+                  <div className="clipboard-green-tape" />
+                  <img src="/stickers/sticker-star.svg" alt="Gold star" className="clipboard-star-sticker" />
+                </div>
+
+                {/* French Fries Carton Sticker */}
                 <img 
                   src="/stickers/sticker-fries.png" 
                   alt="French fries sticker" 
@@ -1027,25 +1060,18 @@ export default function App() {
                   title="Perpetually craving fries 🍟"
                 />
 
-                {/* Wire Loop Rings at the Top */}
-                <div className="top-rings-wire-header" aria-hidden="true">
-                  <svg className="top-rings-wire-svg" viewBox="0 0 260 36" fill="none">
-                    {[22, 64, 106, 148, 190, 232].map((x, i) => (
-                      <g key={i}>
-                        <path d={`M${x - 7} 30 C${x - 7} 4, ${x + 7} 4, ${x + 7} 30`} 
-                              stroke="#1e293b" strokeWidth="2.8" strokeLinecap="round" />
-                        <circle cx={x} cy="28" r="5" fill="#1e293b" />
-                      </g>
+                {/* Main Clipboard Lined Notepad Sheet */}
+                <div className="clipboard-sheet-body">
+                  {/* Left Margin Punch Holes */}
+                  <div className="clipboard-holes-col" aria-hidden="true">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="clipboard-punch-hole" />
                     ))}
-                  </svg>
-                  <div className="top-rings-pastel-band" />
-                </div>
+                  </div>
 
-                {/* Notepad Body with Wavy Hand-Drawn Bottom Edge */}
-                <div className="top-rings-body">
-                  <div className="cutout-sheet-content">
+                  <div className="cutout-sheet-content pl-punch">
                     <span className="canvas-badge badge-peach">LITTLE OBSESSIONS</span>
-                    <h3 className="canvas-note-title">"Chai gave me code & memories ☕"</h3>
+                    <h3 className="canvas-note-title">"Curiosity, code & memories ✦"</h3>
                     <p className="canvas-note-desc">
                       Street food explorer (I take my parathas seriously!), vintage stationery hoarder, and morning light seeker.
                     </p>
@@ -1054,10 +1080,10 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Organic Wavy Bottom Edge SVG */}
-                  <svg className="wavy-bottom-svg" viewBox="0 0 260 16" preserveAspectRatio="none">
-                    <path d="M0 0 L0 8 Q35 16 65 9 Q100 2 135 10 Q170 18 200 8 Q230 0 260 7 L260 0 Z" fill="#fffef8" />
-                    <path d="M0 8 Q35 16 65 9 Q100 2 135 10 Q170 18 200 8 Q230 0 260 7" stroke="#2b1f14" strokeWidth="2" fill="none" />
+                  {/* Organic Ragged Torn Bottom Edge SVG */}
+                  <svg className="torn-bottom-svg" viewBox="0 0 260 16" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0 0 L0 8 Q35 15 65 9 Q100 3 135 11 Q170 17 200 8 Q230 1 260 8 L260 0 Z" fill="#fdfbf5" />
+                    <path d="M0 8 Q35 15 65 9 Q100 3 135 11 Q170 17 200 8 Q230 1 260 8" stroke="#ebdccb" strokeWidth="1" fill="none" />
                   </svg>
                 </div>
               </div>
@@ -1098,6 +1124,7 @@ export default function App() {
                         src={photo.src} 
                         alt={photo.title}
                         className="accordion-img" 
+                        style={{ objectPosition: photo.objectPosition || 'center center' }}
                         loading="lazy"
                       />
 
@@ -1144,36 +1171,59 @@ export default function App() {
 
             {/* Right Flank Notes */}
             <div className="about-canvas-flank flank-right">
-              {/* Note 3: Scalloped Wavy Pink Stamp Card with Ruled Lines (Image 4) */}
-              <div className="scrapbook-cutout-card cutout-scalloped-stamp" style={{ '--cutout-tilt': '1.8deg' }}>
-                {/* Pressed Botanical Flower Sprig */}
+              {/* Note 3: Botanical Herbarium Note with Kraft Tape & Leafy Watercolor Branch (User Photo 4) */}
+              <div className="scrapbook-cutout-card cutout-botanical-card" style={{ '--cutout-tilt': '1.6deg' }}>
+                {/* Watercolor Leafy Branch Sprig emerging from behind top-left */}
                 <img 
-                  src="/pressed-flower.png" 
-                  alt="Pressed flower sticker" 
-                  className="about-decor-sticker sticker-pressed-daisy"
-                  title="Pressed botanical 🌸"
+                  src="/stickers/botanical-branch.svg" 
+                  alt="Watercolor leaf branch" 
+                  className="botanical-branch-under" 
+                  aria-hidden="true" 
                 />
 
-                <div className="scalloped-stamp-container">
-                  <div className="cutout-sheet-content ruled-lines-bg">
-                    <span className="canvas-badge badge-pink">THE MAKER</span>
+                {/* Kraft Paper Washi Tape Strip at top */}
+                <div className="kraft-tape-strip" aria-hidden="true" />
+
+                {/* Botanical Lavender Sprigs Bundle (From User Sticker Sheet) */}
+                <img 
+                  src="/stickers/sticker-lavender.png" 
+                  alt="Lavender botanical sprigs" 
+                  className="about-decor-sticker sticker-pressed-daisy"
+                  title="French lavender sprigs 🌿"
+                />
+
+                {/* Cafe Cream Card Body with Double Border */}
+                <div className="botanical-card-body">
+                  <div className="botanical-card-inner">
+                    <span className="canvas-badge badge-mint">THE MAKER</span>
                     <h3 className="canvas-note-title">"A chronic doodler since childhood ✎"</h3>
                     <p className="canvas-note-desc">
                       If you catch me staring quietly in a cafe, I’m probably sketching the room or dreaming up an interface.
                     </p>
                     <div className="canvas-note-footer">
-                      <span className="footer-doodle doodle-pink">★ sketchbook always in my bag</span>
+                      <span className="footer-doodle doodle-mint">★ sketchbook always in my bag</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Note 4: Scalloped Cloud-Bubble Grid Memo with Diagonal Washi Tape (Image 5) */}
-              <div className="scrapbook-cutout-card cutout-cloud-grid" style={{ '--cutout-tilt': '-2deg' }}>
-                {/* Diagonal Washi Tape pinned at top-left */}
-                <div className="cloud-diagonal-tape" aria-hidden="true" />
+              {/* Note 4: Red-and-White Gingham Envelope Note with Wax Seal (User Photo 2 Middle) */}
+              <div className="scrapbook-cutout-card cutout-gingham-envelope" style={{ '--cutout-tilt': '-1.8deg' }}>
+                {/* Woven Red Gingham Fabric Backing */}
+                <div className="gingham-fabric-backing" aria-hidden="true" />
 
-                {/* Blue Film-Strip Perforated Note Sticker (User uploaded) */}
+                {/* Kraft Envelope Flap peaking from behind */}
+                <div className="kraft-envelope-flap" aria-hidden="true" />
+
+                {/* Pink Embossed Wax Seal on Top-Left */}
+                <img 
+                  src="/stickers/wax-seal.svg" 
+                  alt="Wax seal stamp" 
+                  className="envelope-wax-seal" 
+                  aria-hidden="true" 
+                />
+
+                {/* User's Blue Film-Strip Perforated Note Sticker */}
                 <div className="about-decor-sticker sticker-blue-note-wrap" title="Desk memo 📝">
                   <img 
                     src="/stickers/sticker-blue-note.png" 
@@ -1185,15 +1235,16 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="cloud-grid-container">
-                  <div className="cutout-sheet-content math-grid-bg">
-                    <span className="canvas-badge badge-sky">CORE BELIEF</span>
+                {/* Cream Linen Letter Card */}
+                <div className="gingham-letter-card">
+                  <div className="cutout-sheet-content">
+                    <span className="canvas-badge badge-rose">CORE BELIEF</span>
                     <h3 className="canvas-note-title">"Human connection is the crux of everything I make."</h3>
                     <p className="canvas-note-desc">
                       The process, the pivots, and the care make the outcome deliberate. Tech should feel warm, accessible, and real.
                     </p>
                     <div className="canvas-note-footer">
-                      <span className="footer-doodle doodle-sky">✦ deliberate craft</span>
+                      <span className="footer-doodle doodle-rose">✦ deliberate craft</span>
                     </div>
                   </div>
                 </div>
@@ -1304,8 +1355,6 @@ export default function App() {
                     </g>
                   </svg>
                 </div>
-
-                <span className="specimen-tag-text">ARCHIVE // FOLIO NO. 02</span>
               </div>
 
               <h2 className="projects-section-title">
@@ -2032,6 +2081,370 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* ======================================================== */}
+        {/* SEC. 05 / FOOTER: THE SCRAPBOOK FINALE & CONTACT SANCTUARY */}
+        {/* ======================================================== */}
+        <footer id="contact" className="scrapbook-footer">
+          {/* 1. Scalloped Paper Arch Divider Trim (from Image 5 Vardhanika) */}
+          <div className="footer-scallop-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none">
+              <path 
+                d="M0,0 
+                   Q 30,36 60,0 Q 90,36 120,0 Q 150,36 180,0 Q 210,36 240,0 Q 270,36 300,0
+                   Q 330,36 360,0 Q 390,36 420,0 Q 450,36 480,0 Q 510,36 540,0 Q 570,36 600,0
+                   Q 630,36 660,0 Q 690,36 720,0 Q 750,36 780,0 Q 810,36 840,0 Q 870,36 900,0
+                   Q 930,36 960,0 Q 990,36 1020,0 Q 1050,36 1080,0 Q 1110,36 1140,0 Q 1170,36 1200,0
+                   Q 1230,36 1260,0 Q 1290,36 1320,0 Q 1350,36 1380,0 Q 1410,36 1440,0
+                   L 1440,48 L 0,48 Z" 
+                fill="#fcf8f0" 
+              />
+              <path 
+                d="M0,0 
+                   Q 30,36 60,0 Q 90,36 120,0 Q 150,36 180,0 Q 210,36 240,0 Q 270,36 300,0
+                   Q 330,36 360,0 Q 390,36 420,0 Q 450,36 480,0 Q 510,36 540,0 Q 570,36 600,0
+                   Q 630,36 660,0 Q 690,36 720,0 Q 750,36 780,0 Q 810,36 840,0 Q 870,36 900,0
+                   Q 930,36 960,0 Q 990,36 1020,0 Q 1050,36 1080,0 Q 1110,36 1140,0 Q 1170,36 1200,0
+                   Q 1230,36 1260,0 Q 1290,36 1320,0 Q 1350,36 1380,0 Q 1410,36 1440,0" 
+                stroke="#ebdccb" 
+                strokeWidth="1.8" 
+                strokeDasharray="4 3" 
+                fill="none" 
+              />
+            </svg>
+          </div>
+
+          <div className="footer-inner-wrapper">
+            {/* Giant Soft Typography Watermark in Background (from Image 2 Diya Patel) */}
+            <div className="footer-bg-watermark" aria-hidden="true">
+              Arpita Jadhav
+            </div>
+
+            {/* Vintage Newspaper Cutout: Upper Corner of Container (Top-Left) */}
+            <div className="footer-corner-cutout cutout-above" aria-hidden="true">
+              <div className="corner-washi-tape tape-top" />
+              <img 
+                src="/stickers/ephemera-newspaper-butterfly.png" 
+                alt="Vintage newspaper clipping with butterfly" 
+                className="corner-newspaper-img" 
+                title="Vintage newspaper 📰"
+              />
+            </div>
+
+            {/* 2. Header & Conversational Invitation (Sitting directly on the container - NO separate card!) */}
+            <div className="footer-header-cluster">
+              <div className="footer-eyebrow-script">
+                <span className="script-text">still here? thanks for wandering all the way down ✎</span>
+                <span className="footer-sparkle-doodle">✦</span>
+              </div>
+              
+              <h2 className="footer-main-title">
+                Let's connect & <span className="script-highlight">make something intentional.</span>
+              </h2>
+
+              <p className="footer-tagline">
+                Got an exciting engineering challenge, a full-time role, or just want to geek out over tactile software craft & design? My inbox is always open.
+              </p>
+
+              {/* Availability Status Badge with Pulsing Live Dot */}
+              <div className="footer-availability-badge">
+                <span className="live-pulse-dot" />
+                <span className="availability-text">Open for Full-Time Engineering & Product Roles • 2026</span>
+              </div>
+            </div>
+
+            {/* 3. The Main Scrapbook Desk Composition: Side-by-Side Asymmetric Stationery Showcase */}
+            <div className="footer-desk-composition">
+              
+              {/* Coffee ring stain on desk */}
+              <div className="desk-coffee-stain" aria-hidden="true" />
+
+              {/* OBJECT 1 (LEFT): Compact Archival Photo Specimen Tag (Shortened Content & Unique Chamfered Shape) */}
+              <div className="footer-photo-specimen-card" style={{ '--card-tilt': '-3deg' }}>
+                
+                {/* Brass Grommet & Twine Loop at top */}
+                <div className="specimen-tag-twine" aria-hidden="true" />
+                <div className="specimen-tag-grommet" aria-hidden="true" />
+
+                {/* Vintage Curved Brass Bulldog Clip (From User Clip Sheet) */}
+                <img 
+                  src="/stickers/clip-vintage-brass.png" 
+                  alt="Vintage brass bulldog clip" 
+                  className="specimen-brass-clamp" 
+                  aria-hidden="true" 
+                  title="Vintage brass clamp 📎"
+                />
+
+                {/* Inline SVG Purple Ink Cancellation Postmark */}
+                <div className="specimen-postmark-stamp" aria-hidden="true">
+                  <svg viewBox="0 0 160 160" width="95" height="95" fill="none">
+                    <circle cx="80" cy="80" r="74" stroke="#6d28d9" strokeWidth="2.2" strokeDasharray="8 4" opacity="0.8" />
+                    <circle cx="80" cy="80" r="64" stroke="#6d28d9" strokeWidth="1.5" opacity="0.85" />
+                    <path id="postmark-specimen-top" d="M 26 80 A 54 54 0 0 1 134 80" fill="none" />
+                    <path id="postmark-specimen-bot" d="M 134 80 A 54 54 0 0 1 26 80" fill="none" />
+                    <text fill="#5b21b6" fontFamily="'Space Grotesk', monospace" fontSize="9.5" fontWeight="700" letterSpacing="2.2" opacity="0.95">
+                      <textPath href="#postmark-specimen-top" startOffset="50%" textAnchor="middle">
+                        ★ MUMBAI • 2026 ★
+                      </textPath>
+                    </text>
+                    <text fill="#5b21b6" fontFamily="'Space Grotesk', monospace" fontSize="8.5" fontWeight="700" letterSpacing="1.8" opacity="0.95">
+                      <textPath href="#postmark-specimen-bot" startOffset="50%" textAnchor="middle">
+                        DEV & DESIGN
+                      </textPath>
+                    </text>
+                    <polygon points="80,68 83,77 92,77 85,82.5 87.5,91 80,86 72.5,91 75,82.5 68,77 77,77" fill="#6d28d9" opacity="0.9" />
+                  </svg>
+                </div>
+
+                {/* Chamfered Tag Body */}
+                <div className="specimen-tag-body">
+                  <div className="specimen-tag-kicker">
+                    <span>SPECIMEN // 02</span>
+                    <span className="specimen-status-tag">FULL-STACK & UX</span>
+                  </div>
+
+                  {/* Arpita's Portrait Polaroid */}
+                  <div className="specimen-polaroid-frame">
+                    <img 
+                      src="/arpita-portrait.jpg" 
+                      alt="Arpita Jadhav" 
+                      className="specimen-portrait-img" 
+                    />
+                    <div className="specimen-polaroid-caption">
+                      <span className="specimen-name">Arpita Jadhav ✦</span>
+                      <span className="specimen-sub">Software Engineer & Designer</span>
+                    </div>
+                  </div>
+
+                  {/* Shortened Concise Punchy Bio */}
+                  <div className="specimen-bio-note">
+                    <p className="specimen-bio-quote">
+                      "Software engineer by craft, designer by instinct. Turning chaotic ambiguity into tactile, human-first web & AI software."
+                    </p>
+                  </div>
+
+                  {/* Bottom Doodled Conversation Memo */}
+                  <div className="specimen-footer-memo">
+                    <span className="specimen-memo-text">P.S. Always open for good conversations ✦</span>
+                    <img 
+                      src="/stickers/sticker-teacup.png" 
+                      alt="Vintage porcelain teacup sticker" 
+                      className="specimen-teacup-sticker" 
+                      aria-hidden="true" 
+                      title="Good conversations ✦"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* OBJECT 2 (RIGHT): The Hero Conversation & Mail Station (Focal Point!) */}
+              <div className="footer-terracotta-envelope" style={{ '--envelope-tilt': '1.5deg' }}>
+                
+                {/* Woven Triangular Envelope Flap */}
+                <div className="envelope-v-flap" aria-hidden="true" />
+
+                {/* Stitched Edge perimeter line */}
+                <div className="envelope-stitching" aria-hidden="true" />
+
+                {/* Pink Embossed Wax Seal on Top-Left */}
+                <img 
+                  src="/stickers/wax-seal.svg" 
+                  alt="Wax seal stamp" 
+                  className="envelope-wax-seal-badge" 
+                  aria-hidden="true" 
+                />
+
+                {/* Olive Green Thank You Label Sticker (From User Sticker Sheet) */}
+                <img 
+                  src="/stickers/sticker-thank-you.png" 
+                  alt="Thank you for existing sticker" 
+                  className="envelope-thankyou-sticker" 
+                  aria-hidden="true" 
+                  title="Thank you for existing 🌿"
+                />
+
+                {/* Letter Sheet peeking from envelope pocket */}
+                <div className="envelope-letter-sheet">
+                  {/* Ruby Jewel Heart Paperclip (From User Clip Sheet) */}
+                  <img 
+                    src="/stickers/clip-heart-ruby.png" 
+                    alt="Ruby jewel heart paperclip" 
+                    className="letter-ruby-clip" 
+                    aria-hidden="true" 
+                    title="Heart paperclip 💖"
+                  />
+
+                  <div className="letter-header-row">
+                    <div className="letter-stamp-badge">
+                      <Mail size={12} />
+                      <span>DIRECT INBOX</span>
+                    </div>
+                    <span className="letter-confidential-tag">STRICTLY CRAFT-DRIVEN</span>
+                  </div>
+
+                  <h3 className="letter-heading">Say hello or drop an invite</h3>
+                  <p className="letter-subline">
+                    Always excited for high-ownership software roles, ambitious builds, or great design & tech chats.
+                  </p>
+
+                  {/* One-Click Copy Email Ribbon */}
+                  <div 
+                    className="letter-email-ribbon" 
+                    onClick={handleCopyEmail} 
+                    role="button" 
+                    tabIndex={0}
+                    title="Click to copy email address"
+                    onKeyDown={(e) => {
+                      if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        handleCopyEmail();
+                      }
+                    }}
+                  >
+                    <div className="email-ribbon-left">
+                      <div className="email-envelope-icon" aria-hidden="true">
+                        <Mail size={16} />
+                      </div>
+                      <span className="letter-email-text">arpitajadhav9@gmail.com</span>
+                    </div>
+                    <button 
+                      type="button" 
+                      className="letter-copy-btn" 
+                      aria-label="Copy email address"
+                    >
+                      {emailCopied ? (
+                        <span className="letter-copied-pill">Copied! ✨</span>
+                      ) : (
+                        <span className="letter-copy-label">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                          </svg>
+                          Copy
+                        </span>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Action CTA Buttons */}
+                  <div className="letter-actions-row">
+                    <a href="mailto:arpitajadhav9@gmail.com" className="letter-primary-btn">
+                      <span>Start the conversation</span>
+                      <ArrowUpRight size={16} />
+                    </a>
+                    <a href="/resume.pdf" target="_blank" rel="noreferrer" className="letter-resume-btn">
+                      <span>View Resume</span>
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
+
+                  {/* Live Status Tag inside Letter */}
+                  <div className="letter-status-footer">
+                    <span className="live-status-dot" />
+                    <span className="status-footer-text">Open for Full-Time Engineering & Product Roles • 2026</span>
+                  </div>
+                </div>
+
+                {/* Silk Ribbon Bow Sticker (From User Sticker Sheet - Replaces repeated butterfly!) */}
+                <img 
+                  src="/stickers/sticker-ribbon-bow.png" 
+                  alt="Silk ribbon bow sticker" 
+                  className="envelope-ribbon-decor" 
+                  aria-hidden="true" 
+                  title="Vintage ribbon bow 🎀"
+                />
+              </div>
+
+            </div>
+
+            {/* 4. Quick Page Navigation & Social Pills Bar (Strictly ONE Line on Desktop!) */}
+            <div className="footer-quick-links-bar">
+              {/* Left: Pages */}
+              <div className="footer-nav-col">
+                <span className="nav-row-title">PAGES</span>
+                <div className="pages-pills-list">
+                  <a href="#about" className="footer-nav-pill">About</a>
+                  <a href="#projects" className="footer-nav-pill">Projects</a>
+                  <a href="#experience" className="footer-nav-pill">Experience</a>
+                  <a href="#skills" className="footer-nav-pill">Skills</a>
+                  <a href="#contact" className="footer-nav-pill active">Contact</a>
+                </div>
+              </div>
+
+              {/* Center: Social Links */}
+              <div className="footer-social-col">
+                <span className="nav-row-title">FIND ME</span>
+                <div className="social-pills-list">
+                  <a href="https://github.com/arpitajadhav" target="_blank" rel="noreferrer" className="footer-social-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>GITHUB</span>
+                    <span className="pill-arrow">↗</span>
+                  </a>
+
+                  <a href="https://linkedin.com/in/arpitajadhav" target="_blank" rel="noreferrer" className="footer-social-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    <span>LINKEDIN</span>
+                    <span className="pill-arrow">↗</span>
+                  </a>
+
+                  <a href="https://twitter.com" target="_blank" rel="noreferrer" className="footer-social-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    <span>TWITTER</span>
+                    <span className="pill-arrow">↗</span>
+                  </a>
+
+                  <a href="mailto:arpitajadhav9@gmail.com" className="footer-social-pill">
+                    <Mail size={13} />
+                    <span>EMAIL</span>
+                    <span className="pill-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right: Scroll To Top Button (strictly on the same row!) */}
+              <div className="footer-scroll-top-col">
+                <button 
+                  onClick={scrollToTop} 
+                  className="scroll-to-top-btn" 
+                  title="Back to top" 
+                  aria-label="Back to top"
+                >
+                  <span className="arrow-up-icon">↑</span>
+                  <span className="scroll-btn-label">TOP</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Vintage Newspaper Cutout: Lower Corner of Container (Bottom-Right) */}
+            <div className="footer-corner-cutout cutout-below" aria-hidden="true">
+              <div className="corner-washi-tape tape-bottom" />
+              <img 
+                src="/stickers/ephemera-antique-manuscript.png" 
+                alt="Vintage newsprint article column" 
+                className="corner-newspaper-img" 
+                title="Vintage newsprint 📰"
+              />
+            </div>
+
+            {/* 5. Bottom Colophon & Typewriter Timestamp (From Image 1, 2 & 3) */}
+            <div className="footer-bottom-colophon">
+              <div className="colophon-left">
+                <span className="colophon-copyright">© 2026 Arpita Jadhav • Crafted with code & care ✨</span>
+                <span className="colophon-sub">Designed with scrapbook paper textures & coded with React</span>
+              </div>
+              <div className="colophon-right">
+                <span className="colophon-timestamp">LAST COMMITTED: OCTOBER 2026 // MUMBAI, IN 🇮🇳</span>
+              </div>
+            </div>
+
+          </div>
+        </footer>
       </main>
     </div>
   );
