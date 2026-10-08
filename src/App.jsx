@@ -495,6 +495,16 @@ export default function App() {
   // Projects Section State (Modal Sub-Container)
   const [selectedProject, setSelectedProject] = useState(null);
 
+  // Set tab title and butterfly favicon explicitly on client mount
+  useEffect(() => {
+    document.title = 'Arpita Jadhav';
+    const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/svg+xml';
+    link.rel = 'icon';
+    link.href = '/favicon.svg';
+    document.head.appendChild(link);
+  }, []);
+
   // Handle ESC key and scroll-lock for Project Modal
   useEffect(() => {
     const handleKeyDown = (e) => {
