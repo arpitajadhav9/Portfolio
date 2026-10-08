@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Sparkles, 
-  Heart, 
-  Coffee, 
-  Star, 
-  MapPin, 
-  ExternalLink, 
-  Mail, 
-  Scissors, 
-  Smile, 
-  Compass, 
-  CheckCircle2, 
+import { createPortal } from 'react-dom';
+import {
+  Sparkles,
+  Heart,
+  Coffee,
+  Star,
+  MapPin,
+  ExternalLink,
+  Mail,
+  Scissors,
+  Smile,
+  Compass,
+  CheckCircle2,
   RefreshCw,
   FolderHeart,
   Play,
@@ -34,94 +35,168 @@ import './App.css';
 // Featured Projects Data (Akash S, Rajdeep Sarkar & Smriti Rawat Inspired Showcase)
 const projectsData = [
   {
-    id: 'appgen',
-    category: 'EVOLUTEIQ • AI / SAAS • AUTOMATION PLATFORM',
-    shortCategory: 'AI / SAAS',
-    filterCategory: 'ai',
-    title: 'AppGen — Prompt to Autonomous Workflows',
-    punchline: 'Engineered an AI orchestration canvas that converts natural prompts into executable multi-step pipelines, reducing workflow setup time by 48%.',
-    role: 'Full-Stack Developer & UI/UX',
-    timeline: '8 Weeks • Fall 2025',
-    team: 'Lead Engineer (Solo Build)',
-    image: '/project-appgen.jpg',
-    tags: ['React', 'FastAPI', 'LLM Agents', 'Python', 'Tailwind', 'Figma'],
-    overview: 'AppGen is an AI-powered automation studio allowing product teams to describe, generate, and run resilient backend integrations using conversational natural language prompts.',
-    problem: 'Modern automation tools require manual webhook plumbing, schema definitions, and repetitive configuration. Cross-functional teams often lose 4–6 hours just wiring simple APIs together.',
-    solution: 'Designed an interactive node-graph workspace powered by multi-agent LLM reasoning. Users type what they want to build (e.g. "Trigger invoice verification on Stripe payment and sync to HubSpot"), and AppGen instantly compiles an editable visual state machine with automatic error recovery.',
+    id: 'customer-personality',
+    category: 'RETAIL MARKETING • STATISTICAL EDA • DATA SCIENCE',
+    shortCategory: 'STATISTICAL EDA • PYTHON',
+    filterCategory: 'data',
+    title: 'Customer Personality Analysis & Segmentation',
+    punchline: 'End-to-end exploratory and hypothesis-tested statistical study of 2,240 retail customers in Python, unlocking a 0.79 spend-income correlation and data-backed marketing strategies.',
+    role: 'Data Analyst (End-to-End EDA & Statistical Analysis)',
+    timeline: '2 Weeks • 2026',
+    team: 'Solo Project (Individual Analyst)',
+    image: '/project-customer-personality.jpg',
+    tags: ['Python', 'Pandas', 'NumPy', 'SciPy', 'Matplotlib', 'Seaborn', 'Hypothesis Testing', 'Data Cleaning', 'Feature Engineering'],
+    overview: 'Customer Personality Analysis is an end-to-end exploratory and statistical study of 2,240 customers from a retail marketing dataset. It profiles who customers are (income, education, family structure) and how they spend across products and channels. The goal was to turn those profiles into marketing recommendations backed by hypothesis tests rather than visual impressions.',
+    problem: 'Marketing teams often send the same campaign to every customer. That wastes budget on low-value segments and under-serves high-value ones. The raw data also had quality problems that could distort any conclusion: missing income values (24 rows), impossible values (such as an income of $666,666 and birth years that implied customers aged 100+), constant useless columns, and inconsistent categories ("YOLO", "Absurd", "Alone" in marital status).',
+    solution: 'I built a full analysis pipeline in Python, from raw data to strategy: cleaned the data by filling missing income with the median of each customer\'s education group (income was heavily right-skewed, skew ≈ 6.8); confirmed outliers with boxplots, the IQR method, and the 3-SD empirical rule, comparing capping, winsorizing, and median replacement before deleting implausible rows instead (2,240 → 2,236 rows); engineered features (Total Spend, Total Purchases, Total Kids, Has Kids, Campaigns Accepted, and Enrollment Year); visualized each variable with a chart type matched to its data type; validated every pattern statistically with a t-test, ANOVA, chi-square test, and linear regression with diagnostics; and turned the confirmed findings into a segment-based campaign strategy.',
     highlights: [
-      'Interactive canvas with drag-and-drop node graph and live execution telemetry',
-      'Autonomous agent reasoning loop with schema validation and test sandboxing',
-      'Zero-code webhook integrations for Slack, Stripe, Airtable, and Google Sheets',
-      'Optimistic state synchronization with rollback snapshots and visual diff history'
+      'Income is a strong spend predictor (r = 0.79; regression R² = 0.62)',
+      'Households with kids spent far less (avg $407 vs $1,105 for no-kids); the two-sample t-test confirmed this is not chance (p < 0.001)',
+      'Families with kids used deals much more (2.8 vs 1.1 deal purchases on average), indicating heightened price sensitivity',
+      'Education level significantly affects spend (ANOVA, p < 0.001): Basic-education customers spend ~$82 on average, versus $570–$670 for Graduation, Master and PhD',
+      'Education is significantly associated with campaign response (chi-square, p < 0.001): response rates run from about 4% (Basic) to about 21% (PhD), against 15% overall',
+      'Wine (50%) and meat (28%) make up about 78% of total customer spend',
+      'Strategy: send premium, low-discount campaigns to high-income, no-kids, higher-education customers. Send value-bundle and deal campaigns to families.'
+    ],
+    challenges: [
+      {
+        title: 'Extreme Outliers (Income 666,666, Age 100+)',
+        desc: 'Tested several treatments (capping, winsorizing, and replacement); chose deletion because values were verifiable data-entry errors, not rare real customers (2,240 → 2,236 rows).'
+      },
+      {
+        title: 'Skewed Income with Missing Values',
+        desc: 'Used grouped median imputation by education group instead of an unweighted plain mean to address severe right skewness (skew ≈ 6.8).'
+      },
+      {
+        title: 'Messy Non-Standard Categories',
+        desc: 'Merged junk marital-status labels ("YOLO", "Absurd", "Alone") and unified "2n Cycle" with "Master".'
+      },
+      {
+        title: 'Validating Patterns vs. Random Coincidence',
+        desc: 'Backed every chart pattern with formal statistical significance tests (two-sample t-test, ANOVA, Chi-Square, OLS linear regression) before recommending strategy.'
+      }
     ],
     metrics: [
-      { label: 'Workflow Setup Speed', val: '+48%' },
-      { label: 'Pipeline Reliability', val: '99.4%' },
-      { label: 'Prompt-to-Flow Accuracy', val: '92%' }
+      { label: 'Income vs. Total Spend (r)', val: '0.79' },
+      { label: 'Spend Variance (R²)', val: '62%' },
+      { label: 'No-Kids vs. Kids Spend', val: '2.7x' }
     ],
-    liveUrl: 'https://example.com/demo/appgen',
-    githubUrl: 'https://github.com/arpitajadhav/appgen-ai',
-    figmaUrl: 'https://figma.com/@arpita/appgen'
+    liveUrl: null,
+    githubUrl: 'https://github.com/arpitajadhav9/customer-personality-classification',
+    figmaUrl: null
   },
   {
-    id: 'pulse',
-    category: 'MARVIN • B2B • CUSTOMER FEEDBACK REPOSITORY',
-    shortCategory: 'B2B • PRODUCT DESIGN',
-    filterCategory: 'b2b',
-    title: 'PulseIQ — AI Customer Feedback Repository',
-    punchline: 'Designed a real-time feedback intelligence hub that synthesizes qualitative user insights, accelerating product discovery cycles by 3.2x.',
-    role: 'Product Designer & Frontend Engineer',
-    timeline: '6 Weeks • Summer 2025',
-    team: '3-Person Collaborative Team',
-    image: '/project-pulse.jpg',
-    tags: ['User Research', 'Next.js', 'Data Viz', 'Sentiment AI', 'Design System'],
-    overview: 'PulseIQ aggregates customer interviews, support tickets, and NPS surveys into an intelligent, queryable hub that automatically surfaces user pain points and sentiment trends.',
-    problem: 'Product managers and researchers spend up to 15 hours each sprint manually transcribing, tagging, and synthesizing qualitative user feedback, resulting in delayed roadmap decisions.',
-    solution: 'Built an intuitive B2B feedback intelligence repository featuring instant semantic clustering, interactive sentiment distribution charts, and automated highlight reels linked to timestamped customer quotes.',
+    id: 'cityflow',
+    category: 'SMART CITY • GRAPH ALGORITHMS • FULL-STACK',
+    shortCategory: 'DSA • GRAPH ALGORITHMS',
+    filterCategory: 'dsa',
+    title: 'CityFlow — Smart City Traffic Navigation System',
+    punchline: "Modeled urban road networks as weighted directed graphs in Python, applying Dijkstra's algorithm with min-heap priority queues for dynamic traffic-aware route optimization.",
+    role: 'DSA Developer • Backend Developer • Frontend & UI Integration',
+    timeline: 'Academic Project • Semester 6',
+    team: 'Team Project (Collaborative Engineering)',
+    image: '/project-cityflow.jpg',
+    tags: ['Python', 'Flask', "Dijkstra's Algorithm", 'Weighted Directed Graph', 'Min-Heap Priority Queue', 'Leaflet.js', 'Cypress', 'Selenium', 'JMeter'],
+    overview: "CityFlow is a smart city traffic navigation system that finds optimized routes between city junctions using Dijkstra's Shortest Path Algorithm. The system represents the city as a weighted directed graph, where junctions are nodes and roads are edges. Users can select a source and destination and choose between a fastest route based on travel time or a shortest route based on road distance. The system also simulates traffic congestion and dynamically updates road travel times, allowing Dijkstra's algorithm to recalculate and find a new optimal route in real time.",
+    problem: 'Traditional shortest-path demonstrations generally use fixed distances and do not represent how traffic conditions affect route selection. In a real city, the shortest road is not always the fastest: traffic congestion significantly increases travel time, road conditions change dynamically while navigating, and commuters need to contrast the shortest physical distance against the fastest duration. CityFlow was designed to bridge theoretical Data Structures and Algorithms with a practical, interactive smart-city navigation challenge.',
+    solution: "CityFlow models urban road networks as a weighted directed graph using an adjacency list for efficient memory storage and fast neighbor lookups. Each junction is represented as a node, while each road is a directed edge storing distance, base speed, traffic factor, and calculated travel time. Route optimization runs via Dijkstra's algorithm with Python's heapq min-heap priority queue. In Shortest Route mode, the edge weight is physical road distance (km); in Fastest Route mode, the edge weight is travel time (minutes) dynamically computed from distance, base speed, and congestion factor. When congestion is simulated, the traffic factor increases on selected roads, triggering dynamic route recalculation with path reconstruction via predecessor tracking.",
     highlights: [
-      'Automated semantic clustering of customer feedback across Zendesk, Intercom, and Discord',
-      'Live sentiment telemetry dashboard broken down by user cohort and customer subscription tier',
-      'Interactive "Customer Voice" card deck for sprint planning and executive alignment',
-      'Full-text search engine with AI keyword extraction and thematic affinity mapping'
+      "Dijkstra-based dual-mode route optimization: Shortest Route (distance in km) vs. Fastest Route (traffic-aware travel time in minutes)",
+      "Weighted directed graph representation using adjacency lists for efficient neighbor traversal (Space Complexity: O(V + E))",
+      "Min-heap priority queue (Python heapq) for optimal junction extraction in O((V + E) log V) time",
+      "Dynamic traffic simulation engine that alters road weights in real-time and triggers automatic Dijkstra recalculation",
+      "Interactive Leaflet.js map visualization with source/destination selection, polyline path rendering, and multi-city datasets (Bengaluru & Mumbai)",
+      "Full automated test suite across Cypress (E2E workflows), Selenium/TestNG (functional UI tests), and Apache JMeter (concurrency & load testing)"
+    ],
+    challenges: [
+      {
+        title: 'Finding the Optimal Route Among Multiple Paths',
+        desc: "A complex city grid has dozens of route permutations between any two junctions. Solved by implementing Dijkstra's shortest-path algorithm with predecessor tracking for exact path reconstruction."
+      },
+      {
+        title: 'Shortest vs. Fastest Route Trade-off',
+        desc: 'A physically shorter route often takes longer due to bottlenecks and congestion. Solved by decoupling edge weights into Distance Mode (km) and Time Mode (minutes computed from base speed and traffic factors).'
+      },
+      {
+        title: 'Dynamic Traffic & Route Adaptation',
+        desc: 'Real-world traffic conditions mutate mid-journey. Solved by building a dynamic simulation layer that updates edge weights and re-executes Dijkstra to discover alternative diversion corridors.'
+      },
+      {
+        title: 'Memory-Efficient Graph Representation',
+        desc: 'Dense matrix representation wastes quadratic memory for sparse city graphs. Solved by architecting an adjacency list with hash maps, keeping space complexity linear at O(V + E).'
+      },
+      {
+        title: 'Fastest Next-Junction Extraction',
+        desc: "Linear scans for the unvisited node with lowest cost would degrade Dijkstra to O(V²). Solved by integrating Python's heapq min-heap priority queue, reducing complexity to O((V + E) log V)."
+      },
+      {
+        title: 'Showing Calculated Geometry to Users',
+        desc: 'Finding node sequences in Python backend is abstract without visual geographic representation. Solved by connecting Flask REST APIs with Leaflet.js to render interactive map polylines and segment turn-by-turns.'
+      }
     ],
     metrics: [
-      { label: 'Research Synthesis', val: '3.2x Faster' },
-      { label: 'First-Time Activation', val: '88%' },
-      { label: 'Monthly Active Insights', val: '14k+' }
+      { label: 'Route Modes', val: '2 Modes' },
+      { label: 'Time Complexity', val: 'O((V+E) log V)' },
+      { label: 'Testing Frameworks', val: '3 Types' }
     ],
-    liveUrl: 'https://example.com/demo/pulseiq',
-    githubUrl: 'https://github.com/arpitajadhav/pulse-intelligence',
-    figmaUrl: 'https://figma.com/@arpita/pulseiq'
+    liveUrl: null,
+    githubUrl: 'https://github.com/arpitajadhav9/DSASem6Project',
+    figmaUrl: null
   },
   {
-    id: 'devsprint',
-    category: 'DEV TOOLS • FULL-STACK • ENGINEERING PRODUCTIVITY',
-    shortCategory: 'DEV TOOLS • FULL-STACK',
-    filterCategory: 'devtools',
-    title: 'DevSprint — Context-Aware Developer Workspace',
-    punchline: 'Engineered a unified telemetry console bringing Git milestones, pull request reviews, and CLI processes together, cutting context switching by 35%.',
-    role: 'Systems Engineer & Frontend Lead',
-    timeline: '10 Weeks • Spring 2025',
-    team: 'Engineering Capstone Pod',
-    image: '/project-devsprint.jpg',
-    tags: ['TypeScript', 'GraphQL', 'PostgreSQL', 'Docker', 'Zsh / Bash', 'Tailwind'],
-    overview: 'DevSprint brings all developer workflows — branch status, open code reviews, test velocity, and CLI tasks — into a single unified high-contrast dark dashboard with zero context switching.',
-    problem: 'Software engineers lose up to 20% of their workday hopping between GitHub, Jira, terminal windows, and CI/CD monitors, creating cognitive fatigue and delayed merges.',
-    solution: 'Developed an unified developer cockpit with live git commit flow visualization, embedded terminal drawer, PR review status pills, and sprint burndown tracking in sub-second response times.',
+    id: 'telco-churn',
+    category: 'PREDICTIVE ML • MLOPS • PRODUCTION SYSTEM',
+    shortCategory: 'ML & MLOPS • FASTAPI',
+    filterCategory: 'ml',
+    title: 'Telco Customer Churn Intelligence',
+    punchline: 'End-to-end production ML system predicting customer churn and revenue exposure, containerized with FastAPI, Streamlit, MLflow, DVC, and automated GitHub Actions CI/CD.',
+    role: 'Machine Learning & MLOps Engineer',
+    timeline: 'Academic Project • Fall 2026',
+    team: 'Solo Build • End-to-End Implementation',
+    image: '/project-telco-churn.jpg',
+    tags: ['Python', 'Scikit-learn', 'FastAPI', 'Streamlit', 'Docker', 'MLflow', 'DVC', 'GitHub Actions', 'SHAP', 'Pytest'],
+    overview: 'Telco Customer Churn Intelligence is an end-to-end machine learning and MLOps system that predicts churn probability, quantifies at-risk revenue exposure, and delivers model-supported explanations. Moving far beyond a static notebook, the project integrates feature engineering, experiment tracking, interpretable modeling, and an automated CI/CD pipeline deploying containerized microservices to Docker Hub.',
+    problem: 'Telecom providers face massive recurring revenue losses when customers leave, yet reactive analysis only captures churn after the fact. Predicting churn in active customers requires handling moderate class imbalance (26.5% churn), multicollinearity (~0.9996 correlation between TotalCharges and tenure × MonthlyCharges), missing values in zero-tenure records, and preventing preprocessing data leakage—all while delivering interpretable risk factors that business teams can act upon.',
+    solution: 'Engineered a scikit-learn classification pipeline (StandardScaler + OneHotEncoder + class-weighted Logistic Regression) selected over Random Forest and XGBoost for top ROC-AUC (0.841) and recall (78.6%) paired with native odds-ratio interpretability. The pipeline is packaged into model.joblib and served via FastAPI endpoints alongside an interactive Streamlit console. DVC ensures pipeline and data reproducibility, MLflow tracks experiments and model registry, and GitHub Actions automates testing, Docker builds, and Docker Hub container publishing.',
     highlights: [
-      'Visual Git commit branch graph showing real-time rebases, merges, and CI statuses',
-      'Embedded terminal drawer with custom command shortcuts and npm test monitoring',
-      'Lightweight code diff inspector with inline comments and review approvals',
-      'Sub-50ms GraphQL caching layer for rapid telemetry updates across multiple repos'
+      'Customer-level churn scoring with Low (<40%), Medium (40–70%), and High (>70%) risk thresholds',
+      'Estimated Revenue Exposure metric calculating probability-weighted annual customer value at risk',
+      'Model interpretability via Logistic Regression odds ratios, permutation importance, and SHAP analysis',
+      'Domain feature engineering: tenure lifecycle buckets, total services adoption, and average monthly spend',
+      'Multi-model benchmarking across Logistic Regression, Random Forest, and XGBoost with MLflow tracking',
+      'Containerized dual-service architecture (FastAPI backend + Streamlit UI) with 6/6 automated Pytest validations',
+      'Automated GitHub Actions CI/CD pipeline compiling DVC stages, running test suites, and publishing Docker images'
+    ],
+    challenges: [
+      {
+        title: 'Git vs. DVC Conflict in CI/CD',
+        desc: 'CI runners failed when the dataset was treated simultaneously as a Git-tracked file and a DVC output. Resolved by configuring the raw dataset as a pure DVC pipeline dependency rather than a conflicting output target.'
+      },
+      {
+        title: 'Preventing Preprocessing Leakage',
+        desc: 'Fitting scalers or encoders across the entire dataset distorts evaluation. Strictly scoped all transformations within an sklearn ColumnTransformer fitted exclusively on training folds.'
+      },
+      {
+        title: 'High Multicollinearity & Zero-Tenure Data',
+        desc: 'TotalCharges was heavily collinear (~0.9996) and missing on 11 zero-tenure records. Resolved through conditional business-logic imputation and deriving an orthogonal avg_monthly_spend feature.'
+      },
+      {
+        title: 'Interpretability vs. Complexity Trade-off',
+        desc: 'While tree ensembles performed well, retention teams needed clear coefficients. Champion Logistic Regression delivered both higher Recall (78.6%) and actionable odds ratios.'
+      },
+      {
+        title: 'Reliable Production Containerization',
+        desc: 'Transitioning from notebook experiments to microservices required automated verification. Architected multi-stage Docker builds triggered only after DVC pipeline reproduction and Pytest pass.'
+      }
     ],
     metrics: [
-      { label: 'Context Switching Drop', val: '-35%' },
-      { label: 'PR Review Turnaround', val: '2.1x Faster' },
-      { label: 'API Response Time', val: '<45ms' }
+      { label: 'ROC-AUC Score', val: '0.841' },
+      { label: 'Recall (Churners Detected)', val: '78.6%' },
+      { label: 'Automated API Tests Passed', val: '6/6 Tests' }
     ],
-    liveUrl: 'https://example.com/demo/devsprint',
-    githubUrl: 'https://github.com/arpitajadhav/devsprint',
-    figmaUrl: 'https://figma.com/@arpita/devsprint'
+    liveUrl: null,
+    githubUrl: 'https://github.com/arpitajadhav9/TelcoML',
+    figmaUrl: null
   },
   {
     id: 'mindease',
@@ -500,9 +575,9 @@ export default function App() {
       setTypingSpeed(75);
     } else {
       timer = setTimeout(() => {
-        setDisplayedText((prev) => 
-          isDeleting 
-            ? currentPhrase.substring(0, prev.length - 1) 
+        setDisplayedText((prev) =>
+          isDeleting
+            ? currentPhrase.substring(0, prev.length - 1)
             : currentPhrase.substring(0, prev.length + 1)
         );
       }, typingSpeed);
@@ -514,12 +589,12 @@ export default function App() {
   // Handle stamping anywhere on the hero card without layout shift
   const handleDeskClick = (e) => {
     if (
-      e.target.closest('button') || 
-      e.target.closest('a') || 
+      e.target.closest('button') ||
+      e.target.closest('a') ||
       e.target.closest('.stamp-dropside-container')
     ) return;
     if (!heroRef.current) return;
-    
+
     const cardRect = heroRef.current.getBoundingClientRect();
     const x = e.clientX - cardRect.left;
     const y = e.clientY - cardRect.top;
@@ -565,49 +640,49 @@ export default function App() {
         <header className="scrapbook-navbar">
           {/* Section Tabs */}
           <nav className="nav-links-list" aria-label="Portfolio sections">
-            <a 
-              href="#hero" 
+            <a
+              href="#hero"
               className={`nav-butterfly-btn ${activeTab === 'hero' ? 'active' : ''}`}
               onClick={() => setActiveTab('hero')}
               title="Intro • Scroll to top"
               aria-label="Intro"
             >
-              <img 
-                src="/butterfly.png" 
-                alt="Intro Butterfly" 
-                className="nav-butterfly-img" 
+              <img
+                src="/butterfly.png"
+                alt="Intro Butterfly"
+                className="nav-butterfly-img"
               />
             </a>
-            <a 
-              href="#about" 
+            <a
+              href="#about"
               className={`nav-pill-item ${activeTab === 'about' ? 'active' : ''}`}
               onClick={() => setActiveTab('about')}
             >
               <span>📖</span> About
             </a>
-            <a 
-              href="#experience" 
+            <a
+              href="#experience"
               className={`nav-pill-item ${activeTab === 'experience' ? 'active' : ''}`}
               onClick={() => setActiveTab('experience')}
             >
               <span>💼</span> Experience
             </a>
-            <a 
-              href="#skills" 
+            <a
+              href="#skills"
               className={`nav-pill-item ${activeTab === 'skills' ? 'active' : ''}`}
               onClick={() => setActiveTab('skills')}
             >
               <span>🛠️</span> Skills
             </a>
-            <a 
-              href="#projects" 
+            <a
+              href="#projects"
               className={`nav-pill-item ${activeTab === 'projects' ? 'active' : ''}`}
               onClick={() => setActiveTab('projects')}
             >
               <span>📂</span> Projects
             </a>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               className={`nav-pill-item ${activeTab === 'contact' ? 'active' : ''}`}
               onClick={() => setActiveTab('contact')}
             >
@@ -617,7 +692,7 @@ export default function App() {
 
           {/* Right Action Buttons */}
           <div className="nav-right-actions">
-            <button 
+            <button
               className="nav-confetti-btn"
               onClick={handleConfettiBoom}
               title="Toss some celebratory confetti!"
@@ -647,7 +722,7 @@ export default function App() {
           HERO SECTION CANVAS (Natural 4-Sided Torn Paper Spread)
           =================================================== */}
       <main id="hero">
-        <section 
+        <section
           ref={heroRef}
           className="hero-spread-canvas"
           onClick={handleDeskClick}
@@ -662,8 +737,8 @@ export default function App() {
           {/* Absolute Isolated Stamp Overlay (zero layout shift, lands anywhere in 2D space) */}
           <div className="stamps-overlay-layer" aria-hidden="true">
             {placedStamps.map((stamp) => (
-              <div 
-                key={stamp.id} 
+              <div
+                key={stamp.id}
                 className="stamp-spot"
                 style={{
                   left: `${stamp.x}px`,
@@ -698,9 +773,9 @@ export default function App() {
           {/* Top-Left Scrapbook Accent: Pressed Botanical Wildflower taped with translucent washi tape */}
           <div className="hero-pressed-flower-wrapper" aria-hidden="true" title="Pressed Botanical Wildflower">
             <div className="pressed-flower-tape washi-tape washi-tape-peach" />
-            <img 
-              src="/pressed-flower.png" 
-              alt="Pressed Botanical Wildflower" 
+            <img
+              src="/pressed-flower.png"
+              alt="Pressed Botanical Wildflower"
               className="hero-pressed-flower-img"
             />
           </div>
@@ -735,8 +810,8 @@ export default function App() {
 
           {/* 4. DUAL-ARC SCRAPBOOK CUTOUTS (Smriti Rawat & Shreya Sama Inspired Arrangement) 
               Pure transparent cutouts with soft 3D drop shadow - NO container boxes! */}
-          <div 
-            className="scrapbook-artifacts-container" 
+          <div
+            className="scrapbook-artifacts-container"
             aria-label="Creative desk disciplines"
           >
             {artifacts.map((art) => (
@@ -786,26 +861,108 @@ export default function App() {
                     </svg>
                   )}
 
-                  {/* 2. PRODUCT DESIGN: Artist Palette, Paint Dollops & Brush */}
+                  {/* 2. PRODUCT DESIGN: Figma Artboard, Vector Bézier Curve, Design Tokens & Pen Tool */}
                   {art.id === 'design' && (
                     <svg width="94" height="88" viewBox="0 0 96 90" fill="none">
-                      <path d="M22 66 C 14 56, 12 36, 26 22 C 40 8, 68 8, 80 24 C 92 40, 88 64, 72 74 C 60 82, 46 76, 38 68 C 34 64, 28 64, 22 66 Z" fill="#fef3c7" stroke="#b45309" strokeWidth="2.5" />
-                      <ellipse cx="70" cy="56" rx="6.5" ry="8" fill="#fbf7ee" stroke="#b45309" strokeWidth="2" transform="rotate(-15 70 56)" />
-                      <circle cx="34" cy="25" r="6" fill="#f43f5e" />
-                      <circle cx="32" cy="23" r="2" fill="#fda4af" />
-                      <circle cx="50" cy="18" r="6" fill="#3b82f6" />
-                      <circle cx="48" cy="16" r="2" fill="#93c5fd" />
-                      <circle cx="68" cy="23" r="6" fill="#10b981" />
-                      <circle cx="66" cy="21" r="2" fill="#6ee7b7" />
-                      <circle cx="28" cy="42" r="5.5" fill="#f59e0b" />
-                      <circle cx="26" cy="40" r="1.8" fill="#fde68a" />
-                      <circle cx="32" cy="58" r="5.5" fill="#8b5cf6" />
-                      <circle cx="30" cy="56" r="1.8" fill="#c4b5fd" />
-                      <g transform="rotate(-38 46 64)">
-                        <rect x="42" y="24" width="8" height="52" rx="3" fill="#ca8a04" stroke="#92400e" strokeWidth="1.5" />
-                        <rect x="42" y="20" width="8" height="7" fill="#94a3b8" stroke="#475569" strokeWidth="1" />
-                        <path d="M42 20 C 42 12, 46 8, 46 8 C 46 8, 50 12, 50 20 Z" fill="#1e293b" />
-                        <path d="M44 14 C 44 10, 46 8, 46 8 C 46 8, 48 10, 48 14 Z" fill="#f43f5e" />
+                      <defs>
+                        <filter id="artboard-shadow" x="4" y="4" width="82" height="84" filterUnits="userSpaceOnUse">
+                          <feDropShadow dx="0" dy="4" stdDeviation="3" floodColor="#431407" floodOpacity="0.09" />
+                        </filter>
+                        <linearGradient id="pen-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#1e1b4b" />
+                          <stop offset="50%" stopColor="#312e81" />
+                          <stop offset="100%" stopColor="#0f172a" />
+                        </linearGradient>
+                        <linearGradient id="pen-nib-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#f1f5f9" />
+                          <stop offset="50%" stopColor="#94a3b8" />
+                          <stop offset="100%" stopColor="#64748b" />
+                        </linearGradient>
+                        <linearGradient id="curve-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#ec4899" />
+                          <stop offset="50%" stopColor="#8b5cf6" />
+                          <stop offset="100%" stopColor="#3b82f6" />
+                        </linearGradient>
+                      </defs>
+
+                      {/* 1. Backing Artboard Sheet */}
+                      <g filter="url(#artboard-shadow)">
+                        <rect x="10" y="8" width="70" height="74" rx="7" fill="#ffffff" stroke="#cbd5e1" strokeWidth="1.8" />
+                      </g>
+
+                      {/* Dotted Canvas Grid */}
+                      <g opacity="0.32">
+                        <circle cx="22" cy="25" r="0.9" fill="#94a3b8" />
+                        <circle cx="34" cy="25" r="0.9" fill="#94a3b8" />
+                        <circle cx="46" cy="25" r="0.9" fill="#94a3b8" />
+                        <circle cx="58" cy="25" r="0.9" fill="#94a3b8" />
+                        <circle cx="70" cy="25" r="0.9" fill="#94a3b8" />
+
+                        <circle cx="22" cy="37" r="0.9" fill="#94a3b8" />
+                        <circle cx="34" cy="37" r="0.9" fill="#94a3b8" />
+                        <circle cx="46" cy="37" r="0.9" fill="#94a3b8" />
+                        <circle cx="58" cy="37" r="0.9" fill="#94a3b8" />
+                        <circle cx="70" cy="37" r="0.9" fill="#94a3b8" />
+
+                        <circle cx="22" cy="49" r="0.9" fill="#94a3b8" />
+                        <circle cx="34" cy="49" r="0.9" fill="#94a3b8" />
+                        <circle cx="46" cy="49" r="0.9" fill="#94a3b8" />
+                        <circle cx="58" cy="49" r="0.9" fill="#94a3b8" />
+                        <circle cx="70" cy="49" r="0.9" fill="#94a3b8" />
+                      </g>
+
+                      {/* Artboard Header Tag: "# FRAME 01" */}
+                      <rect x="15" y="13" width="31" height="7.5" rx="2" fill="#f3e8ff" />
+                      <text x="18" y="18.8" fontFamily="Space Grotesk, sans-serif" fontSize="5" fontWeight="700" fill="#7e22ce" letterSpacing="0.4"># FRAME 01</text>
+
+                      {/* 2. Vector Bézier Curve & Tangent Handles */}
+                      <line x1="24" y1="48" x2="38" y2="28" stroke="#c084fc" strokeWidth="1.2" strokeDasharray="2.5 1.5" />
+                      <circle cx="38" cy="28" r="2.2" fill="#ffffff" stroke="#9333ea" strokeWidth="1.4" />
+
+                      <line x1="66" y1="46" x2="52" y2="34" stroke="#c084fc" strokeWidth="1.2" strokeDasharray="2.5 1.5" />
+                      <circle cx="52" cy="34" r="2.2" fill="#ffffff" stroke="#9333ea" strokeWidth="1.4" />
+
+                      <path d="M 24 48 C 38 28, 52 34, 66 46" stroke="url(#curve-grad)" strokeWidth="3" strokeLinecap="round" fill="none" />
+
+                      {/* Anchor Points */}
+                      <rect x="21.5" y="45.5" width="5" height="5" rx="1" fill="#ffffff" stroke="#7c3aed" strokeWidth="1.6" />
+                      <rect x="63.5" y="43.5" width="5" height="5" rx="1" fill="#7c3aed" stroke="#ffffff" strokeWidth="1" />
+
+                      {/* 3. Design System Color Swatches */}
+                      <g transform="translate(17, 61)">
+                        <rect x="0" y="0" width="11" height="15" rx="2.5" fill="#f43f5e" />
+                        <rect x="0" y="9.5" width="11" height="5.5" rx="1" fill="#ffffff" />
+                        <text x="2" y="13.5" fontFamily="Space Grotesk, sans-serif" fontSize="3.5" fontWeight="700" fill="#881337">500</text>
+
+                        <rect x="14" y="0" width="11" height="15" rx="2.5" fill="#8b5cf6" />
+                        <rect x="14" y="9.5" width="11" height="5.5" rx="1" fill="#ffffff" />
+                        <text x="16" y="13.5" fontFamily="Space Grotesk, sans-serif" fontSize="3.5" fontWeight="700" fill="#4c1d95">600</text>
+
+                        <rect x="28" y="0" width="11" height="15" rx="2.5" fill="#06b6d4" />
+                        <rect x="28" y="9.5" width="11" height="5.5" rx="1" fill="#ffffff" />
+                        <text x="30" y="13.5" fontFamily="Space Grotesk, sans-serif" fontSize="3.5" fontWeight="700" fill="#164e63">400</text>
+
+                        <rect x="42" y="0" width="11" height="15" rx="2.5" fill="#f59e0b" />
+                        <rect x="42" y="9.5" width="11" height="5.5" rx="1" fill="#ffffff" />
+                        <text x="44" y="13.5" fontFamily="Space Grotesk, sans-serif" fontSize="3.5" fontWeight="700" fill="#78350f">300</text>
+                      </g>
+
+                      {/* 4. Figma Designer Cursor */}
+                      <g transform="translate(56, 19)">
+                        <path d="M 0 0 L 0 11 L 3 8.5 L 6.5 13 L 8.5 12 L 5 7.5 L 9 7.5 Z" fill="#f43f5e" stroke="#ffffff" strokeWidth="1" />
+                        <rect x="8" y="8" width="17" height="7.5" rx="2" fill="#f43f5e" />
+                        <text x="10" y="13.5" fontFamily="Space Grotesk, sans-serif" fontSize="4.6" fontWeight="700" fill="#ffffff">Arpita</text>
+                      </g>
+
+                      {/* 5. Precision Vector Pen Tool */}
+                      <g transform="translate(68, 48) rotate(-42)">
+                        <rect x="-3" y="0" width="6" height="32" rx="2" fill="url(#pen-body-grad)" stroke="#475569" strokeWidth="0.8" />
+                        <rect x="-3" y="4" width="6" height="2" fill="#f59e0b" />
+                        <rect x="-3" y="24" width="6" height="3" fill="#cbd5e1" />
+                        <path d="M -3 0 L 0 -8 L 3 0 Z" fill="url(#pen-nib-grad)" stroke="#64748b" strokeWidth="0.6" />
+                        <circle cx="0" cy="-3.5" r="0.75" fill="#0f172a" />
+                        <line x1="0" y1="-3.5" x2="0" y2="-8" stroke="#0f172a" strokeWidth="0.6" />
+                        <circle cx="0" cy="-8.5" r="1.4" fill="#a855f7" />
                       </g>
                     </svg>
                   )}
@@ -881,9 +1038,9 @@ export default function App() {
               <FolderHeart size={16} />
               <span>Flip Through Projects</span>
             </a>
-            <a 
-              href="/resume.pdf" 
-              download="Arpita_Jadhav_Resume.pdf" 
+            <a
+              href="/resume.pdf"
+              download="Arpita_Jadhav_Resume.pdf"
               className="btn-hero-secondary"
               title="Download Resume"
               target="_blank"
@@ -907,19 +1064,19 @@ export default function App() {
             >
               <span className="stamp-dropside-icon">🎨</span>
               <span className="stamp-dropside-label">Stamp Kit</span>
-              <ChevronRight 
-                size={14} 
-                className={`stamp-dropside-chevron ${isStampKitOpen ? 'open' : ''}`} 
+              <ChevronRight
+                size={14}
+                className={`stamp-dropside-chevron ${isStampKitOpen ? 'open' : ''}`}
               />
             </button>
 
             {isStampKitOpen && (
-              <div 
+              <div
                 className="stamp-dropside-tray"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="stamp-dropside-chips">
-                  <button 
+                  <button
                     type="button"
                     className={`stamp-chip-mini ${activeStamp === 'star' ? 'active' : ''}`}
                     onClick={() => setActiveStamp('star')}
@@ -928,7 +1085,7 @@ export default function App() {
                     <span>⭐</span>
                     <span>Star</span>
                   </button>
-                  <button 
+                  <button
                     type="button"
                     className={`stamp-chip-mini ${activeStamp === 'heart' ? 'active' : ''}`}
                     onClick={() => setActiveStamp('heart')}
@@ -937,7 +1094,7 @@ export default function App() {
                     <span>💖</span>
                     <span>Heart</span>
                   </button>
-                  <button 
+                  <button
                     type="button"
                     className={`stamp-chip-mini ${activeStamp === 'coffee' ? 'active' : ''}`}
                     onClick={() => setActiveStamp('coffee')}
@@ -949,7 +1106,7 @@ export default function App() {
                 </div>
 
                 {placedStamps.length > 0 && (
-                  <button 
+                  <button
                     type="button"
                     className="stamp-dropside-clear-btn"
                     onClick={() => setPlacedStamps([])}
@@ -997,7 +1154,7 @@ export default function App() {
             {/* Left Flank Notes */}
             <div className="about-canvas-flank flank-left">
               {/* Note 1: Torn Deckle Paper with Periwinkle Backing Sheet & Metallic Clip (User Photo 3 Top) */}
-              <div className="scrapbook-cutout-card cutout-deckle-paper" style={{ '--cutout-tilt': '-2.2deg' }}>
+              <div className="scrapbook-cutout-card cutout-deckle-paper" style={{ '--cutout-tilt': '-2deg' }}>
                 {/* Periwinkle/Lavender Torn Backing Sheet peaking behind */}
                 <div className="deckle-backing-sheet" aria-hidden="true" />
 
@@ -1011,15 +1168,15 @@ export default function App() {
                         <stop offset="100%" stopColor="#64748b" />
                       </linearGradient>
                     </defs>
-                    <path d="M7 14 V32 C7 36 17 36 17 32 V8 C17 3 4 3 4 8 V35 C4 41 20 41 20 35 V14" 
-                          stroke="url(#silver-clip-grad)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7 14 V32 C7 36 17 36 17 32 V8 C17 3 4 3 4 8 V35 C4 41 20 41 20 35 V14"
+                      stroke="url(#silver-clip-grad)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
 
                 {/* Vintage Air Mail Postage Stamp */}
-                <img 
-                  src="/stickers/sticker-stamp.svg" 
-                  alt="Vintage postage stamp sticker" 
+                <img
+                  src="/stickers/sticker-stamp.svg"
+                  alt="Vintage postage stamp sticker"
                   className="about-decor-sticker sticker-airmail-stamp"
                   title="Air mail postage stamp"
                 />
@@ -1040,7 +1197,7 @@ export default function App() {
               </div>
 
               {/* Note 2: Vintage Brass Clipboard Note with Torn Lined Paper & Gold Star (User Photo 2 Bottom) */}
-              <div className="scrapbook-cutout-card cutout-clipboard-note" style={{ '--cutout-tilt': '1.8deg' }}>
+              <div className="scrapbook-cutout-card cutout-clipboard-note" style={{ '--cutout-tilt': '1.4deg' }}>
                 {/* Vintage Brass Clipboard Clamp Header */}
                 <div className="clipboard-clamp-header" aria-hidden="true">
                   <img src="/stickers/brass-clip.svg" alt="Brass clipboard clamp" className="clipboard-brass-img" />
@@ -1053,15 +1210,18 @@ export default function App() {
                 </div>
 
                 {/* French Fries Carton Sticker */}
-                <img 
-                  src="/stickers/sticker-fries.png" 
-                  alt="French fries sticker" 
+                <img
+                  src="/stickers/sticker-fries.png"
+                  alt="French fries sticker"
                   className="about-decor-sticker sticker-french-fries"
                   title="Perpetually craving fries 🍟"
                 />
 
                 {/* Main Clipboard Lined Notepad Sheet */}
                 <div className="clipboard-sheet-body">
+                  {/* Classic American Legal Pad Double Red Margin */}
+                  <div className="legal-pad-margin-line" aria-hidden="true" />
+
                   {/* Left Margin Punch Holes */}
                   <div className="clipboard-holes-col" aria-hidden="true">
                     {[...Array(5)].map((_, i) => (
@@ -1080,10 +1240,10 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Organic Ragged Torn Bottom Edge SVG */}
-                  <svg className="torn-bottom-svg" viewBox="0 0 260 16" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M0 0 L0 8 Q35 15 65 9 Q100 3 135 11 Q170 17 200 8 Q230 1 260 8 L260 0 Z" fill="#fdfbf5" />
-                    <path d="M0 8 Q35 15 65 9 Q100 3 135 11 Q170 17 200 8 Q230 1 260 8" stroke="#ebdccb" strokeWidth="1" fill="none" />
+                  {/* Authentic Micro-perforated Ragged Torn Bottom Edge SVG */}
+                  <svg className="torn-bottom-svg" viewBox="0 0 320 18" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0 0 L0 8 L9 13 L16 7 L25 14 L32 8 L41 14 L48 7 L57 13 L64 8 L73 14 L80 7 L89 13 L96 8 L105 14 L112 7 L121 13 L128 8 L137 14 L144 7 L153 13 L160 8 L169 14 L176 7 L185 13 L192 8 L201 14 L208 7 L217 13 L224 8 L233 14 L240 7 L249 13 L256 8 L265 14 L272 7 L281 13 L288 8 L297 14 L304 8 L313 13 L320 8 L320 0 Z" fill="#fef9db" />
+                    <path d="M0 8 L9 13 L16 7 L25 14 L32 8 L41 14 L48 7 L57 13 L64 8 L73 14 L80 7 L89 13 L96 8 L105 14 L112 7 L121 13 L128 8 L137 14 L144 7 L153 13 L160 8 L169 14 L176 7 L185 13 L192 8 L201 14 L208 7 L217 13 L224 8 L233 14 L240 7 L249 13 L256 8 L265 14 L272 7 L281 13 L288 8 L297 14 L304 8 L313 13 L320 8" stroke="#ebd9a2" strokeWidth="1.2" fill="none" />
                   </svg>
                 </div>
               </div>
@@ -1094,9 +1254,9 @@ export default function App() {
               {/* Handwritten Doodles around stack */}
               <div className="doodle-annotation top-doodle" aria-hidden="true">
                 making art & software ✦
-                <img 
-                  src="/stickers/sticker-star.svg" 
-                  alt="Gold sparkle sticker" 
+                <img
+                  src="/stickers/sticker-star.svg"
+                  alt="Gold sparkle sticker"
                   className="about-decor-sticker sticker-gold-star"
                   title="Sparkle ✦"
                 />
@@ -1120,10 +1280,10 @@ export default function App() {
                       <div className="accordion-washi-tape" aria-hidden="true" />
 
                       {/* Photo Image */}
-                      <img 
-                        src={photo.src} 
+                      <img
+                        src={photo.src}
                         alt={photo.title}
-                        className="accordion-img" 
+                        className="accordion-img"
                         style={{ objectPosition: photo.objectPosition || 'center center' }}
                         loading="lazy"
                       />
@@ -1145,22 +1305,6 @@ export default function App() {
                     </div>
                   );
                 })}
-
-                {/* Indian Classical Dance Feet Sticker (User uploaded) */}
-                <img 
-                  src="/stickers/sticker-dance.png" 
-                  alt="Classical dance feet sticker" 
-                  className="about-decor-sticker sticker-dance-feet"
-                  title="Rhythm in my soul 🩰"
-                />
-
-                {/* Retro Instax Camera Sticker with Daisies (User uploaded) */}
-                <img 
-                  src="/stickers/sticker-camera.png" 
-                  alt="Retro Instax camera sticker" 
-                  className="about-decor-sticker sticker-instax-camera"
-                  title="Fujifilm memories 📷"
-                />
               </div>
 
               {/* Bottom Doodle under stack */}
@@ -1172,28 +1316,46 @@ export default function App() {
             {/* Right Flank Notes */}
             <div className="about-canvas-flank flank-right">
               {/* Note 3: Botanical Herbarium Note with Kraft Tape & Leafy Watercolor Branch (User Photo 4) */}
-              <div className="scrapbook-cutout-card cutout-botanical-card" style={{ '--cutout-tilt': '1.6deg' }}>
+              <div className="scrapbook-cutout-card cutout-botanical-card" style={{ '--cutout-tilt': '1.5deg' }}>
                 {/* Watercolor Leafy Branch Sprig emerging from behind top-left */}
-                <img 
-                  src="/stickers/botanical-branch.svg" 
-                  alt="Watercolor leaf branch" 
-                  className="botanical-branch-under" 
-                  aria-hidden="true" 
+                <img
+                  src="/stickers/botanical-branch.svg"
+                  alt="Watercolor leaf branch"
+                  className="botanical-branch-under"
+                  aria-hidden="true"
                 />
 
                 {/* Kraft Paper Washi Tape Strip at top */}
                 <div className="kraft-tape-strip" aria-hidden="true" />
 
                 {/* Botanical Lavender Sprigs Bundle (From User Sticker Sheet) */}
-                <img 
-                  src="/stickers/sticker-lavender.png" 
-                  alt="Lavender botanical sprigs" 
+                <img
+                  src="/stickers/sticker-lavender.png"
+                  alt="Lavender botanical sprigs"
                   className="about-decor-sticker sticker-pressed-daisy"
                   title="French lavender sprigs 🌿"
                 />
 
-                {/* Cafe Cream Card Body with Double Border */}
+                {/* Retro Instax Camera Sticker with Daisies (Moved from busy photos onto The Maker card) */}
+                <img
+                  src="/stickers/sticker-camera.png"
+                  alt="Retro Instax camera sticker"
+                  className="about-decor-sticker sticker-instax-camera"
+                  title="Fujifilm memories 📷"
+                />
+
+                {/* Artist's Wire-Bound Sketchbook Page with Drafting Grid */}
                 <div className="botanical-card-body">
+                  {/* Spiral Wire Punch Header with Perforated Tear Line */}
+                  <div className="sketchbook-spiral-header" aria-hidden="true">
+                    <div className="spiral-holes-row">
+                      {[...Array(9)].map((_, i) => (
+                        <span key={i} className="spiral-wire-hole" />
+                      ))}
+                    </div>
+                    <div className="spiral-perf-line" />
+                  </div>
+
                   <div className="botanical-card-inner">
                     <span className="canvas-badge badge-mint">THE MAKER</span>
                     <h3 className="canvas-note-title">"A chronic doodler since childhood ✎"</h3>
@@ -1208,35 +1370,46 @@ export default function App() {
               </div>
 
               {/* Note 4: Red-and-White Gingham Envelope Note with Wax Seal (User Photo 2 Middle) */}
-              <div className="scrapbook-cutout-card cutout-gingham-envelope" style={{ '--cutout-tilt': '-1.8deg' }}>
-                {/* Woven Red Gingham Fabric Backing */}
+              <div className="scrapbook-cutout-card cutout-gingham-envelope" style={{ '--cutout-tilt': '-1.5deg' }}>
+                {/* Woven Red Gingham Fabric Backing with Pinked Sawtooth Edges */}
                 <div className="gingham-fabric-backing" aria-hidden="true" />
 
                 {/* Kraft Envelope Flap peaking from behind */}
                 <div className="kraft-envelope-flap" aria-hidden="true" />
 
                 {/* Pink Embossed Wax Seal on Top-Left */}
-                <img 
-                  src="/stickers/wax-seal.svg" 
-                  alt="Wax seal stamp" 
-                  className="envelope-wax-seal" 
-                  aria-hidden="true" 
+                <img
+                  src="/stickers/wax-seal.svg"
+                  alt="Wax seal stamp"
+                  className="envelope-wax-seal"
+                  aria-hidden="true"
+                />
+
+                {/* Indian Classical Dance Feet Sticker (Moved from busy photos onto Core Belief / Craft card) */}
+                <img
+                  src="/stickers/sticker-dance.png"
+                  alt="Classical dance feet sticker"
+                  className="about-decor-sticker sticker-dance-feet"
+                  title="Rhythm in my soul 🩰"
                 />
 
                 {/* User's Blue Film-Strip Perforated Note Sticker */}
                 <div className="about-decor-sticker sticker-blue-note-wrap" title="Desk memo 📝">
-                  <img 
-                    src="/stickers/sticker-blue-note.png" 
-                    alt="Blue memo note sticker" 
-                    className="sticker-blue-note-img" 
+                  <img
+                    src="/stickers/sticker-blue-note.png"
+                    alt="Blue memo note sticker"
+                    className="sticker-blue-note-img"
                   />
                   <div className="sticker-blue-note-caption">
                     <span>stay curious ✦</span>
                   </div>
                 </div>
 
-                {/* Cream Linen Letter Card */}
+                {/* Cream Linen Letter Card with Aerogramme Accents */}
                 <div className="gingham-letter-card">
+                  <div className="aerogramme-corner-accent top-left" aria-hidden="true" />
+                  <div className="aerogramme-corner-accent bottom-right" aria-hidden="true" />
+
                   <div className="cutout-sheet-content">
                     <span className="canvas-badge badge-rose">CORE BELIEF</span>
                     <h3 className="canvas-note-title">"Human connection is the crux of everything I make."</h3>
@@ -1259,8 +1432,8 @@ export default function App() {
               <ArrowUpRight size={16} className="btn-arrow-icon" />
             </a>
 
-            <a 
-              href="/resume.pdf" 
+            <a
+              href="/resume.pdf"
               download="Arpita_Jadhav_Resume.pdf"
               className="about-resume-btn"
               title="Download Arpita's Resume"
@@ -1271,7 +1444,7 @@ export default function App() {
 
             {/* Photo Navigator */}
             <div className="about-gallery-nav" aria-label="Photo gallery controls">
-              <button 
+              <button
                 onClick={() => setActivePhotoIndex((prev) => (prev > 0 ? prev - 1 : aboutPhotosData.length - 1))}
                 className="gallery-nav-btn prev"
                 title="Previous photo"
@@ -1282,7 +1455,7 @@ export default function App() {
               <span className="gallery-counter">
                 {String(activePhotoIndex + 1).padStart(2, '0')} / {String(aboutPhotosData.length).padStart(2, '0')}
               </span>
-              <button 
+              <button
                 onClick={() => setActivePhotoIndex((prev) => (prev < aboutPhotosData.length - 1 ? prev + 1 : 0))}
                 className="gallery-nav-btn next"
                 title="Next photo"
@@ -1366,7 +1539,7 @@ export default function App() {
                 Systems I've engineered with code and designed with care.
               </p>
             </div>
-            
+
             {/* Scrapbook Desk Vignette: Hand-Sharpened 2B Drafting Pencil + Pinned Handwritten Note */}
             <div className="projects-header-desk-cluster">
               {/* Vintage Wooden 2B Drafting Pencil pointing towards the handwritten note */}
@@ -1436,15 +1609,15 @@ export default function App() {
                     </text>
 
                     {/* Sharpened Exposed Cedar Wood Cone with Carved Scallops */}
-                    <path 
+                    <path
                       d="M134 7 
                          C136 9, 136 9, 134 11 
                          C136 13, 136 13, 134 15 
                          C136 17, 136 17, 134 19 
                          L158 14.5 
                          L158 11.5 
-                         Z" 
-                      fill="url(#pencil-cedar)" 
+                         Z"
+                      fill="url(#pencil-cedar)"
                     />
                     <path d="M138 10 L152 12.2" stroke="#d97706" strokeWidth="0.4" opacity="0.4" />
                     <path d="M138 16 L152 13.8" stroke="#d97706" strokeWidth="0.4" opacity="0.4" />
@@ -1484,7 +1657,7 @@ export default function App() {
                     click any card to open case study
                   </span>
                   <svg width="26" height="20" viewBox="0 0 28 22" fill="none" className="note-doodle-arrow" aria-hidden="true">
-                    <path d="M4 4 C14 2, 22 8, 20 18 M15 14 L20 18 L24 13" stroke="#c2412d" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M4 4 C14 2, 22 8, 20 18 M15 14 L20 18 L24 13" stroke="#c2412d" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               </div>
@@ -1494,8 +1667,8 @@ export default function App() {
           {/* 2-Column Responsive Project Grid (Compact Scrapbook Cards) */}
           <div className="projects-showcase-grid">
             {projectsData.map((project, idx) => (
-              <article 
-                key={project.id} 
+              <article
+                key={project.id}
                 className="project-showcase-card scrapbook-card-textured"
                 style={{ '--card-rot': `${idx % 2 === 0 ? -1.1 : 1.1}deg` }}
                 onClick={() => setSelectedProject(project)}
@@ -1509,9 +1682,9 @@ export default function App() {
                 aria-label={`Open case study for ${project.title}`}
               >
                 {/* Scrapbook Accent: Color Washi Tape Strip at top of card */}
-                <div 
-                  className={`card-washi-tape tape-variant-${(idx % 4) + 1}`} 
-                  aria-hidden="true" 
+                <div
+                  className={`card-washi-tape tape-variant-${(idx % 4) + 1}`}
+                  aria-hidden="true"
                 />
 
                 {/* Card Index & Category Header */}
@@ -1523,13 +1696,13 @@ export default function App() {
 
                 {/* 1. Visual Preview Box with Soft Studio Backdrop, Rounded Corners & Floating Arrow Button */}
                 <div className="project-preview-box">
-                  <img 
-                    src={project.image} 
+                  <img
+                    src={project.image}
                     alt={project.title}
                     className="project-preview-img"
                     loading="lazy"
                   />
-                  
+
                   {/* Floating Circular Arrow Button */}
                   <div className="project-preview-corner-btn" title="Open Case Study Dossier">
                     <ArrowUpRight size={16} />
@@ -1566,194 +1739,6 @@ export default function App() {
             ))}
           </div>
 
-          {/* ===================================================
-              INTERACTIVE PROJECT CASE STUDY DOSSIER (Sub-Container / Modal)
-              =================================================== */}
-          {selectedProject && (
-            <div 
-              className="project-dossier-overlay"
-              onClick={() => setSelectedProject(null)}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="modal-project-title"
-            >
-              <div 
-                className="project-dossier-container"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Scrapbook Top Washi Tape Accent */}
-                <div className="dossier-washi-tape" aria-hidden="true" />
-
-                {/* Dossier Header Bar */}
-                <header className="dossier-header-bar">
-                  <div className="dossier-header-meta">
-                    <span className="dossier-badge">
-                      CASE STUDY DOSSIER • {selectedProject.shortCategory}
-                    </span>
-                    <h3 id="modal-project-title" className="dossier-title">
-                      {selectedProject.title}
-                    </h3>
-                  </div>
-
-                  <button 
-                    type="button"
-                    className="dossier-close-btn"
-                    onClick={() => setSelectedProject(null)}
-                    title="Close case study (Esc)"
-                    aria-label="Close case study"
-                  >
-                    <X size={20} />
-                  </button>
-                </header>
-
-                {/* Scrollable Dossier Body */}
-                <div className="dossier-scroll-body">
-                  {/* Hero Visual Preview */}
-                  <div className="dossier-hero-preview">
-                    <img 
-                      src={selectedProject.image} 
-                      alt={selectedProject.title}
-                      className="dossier-hero-img"
-                    />
-                  </div>
-
-                  {/* Quick Meta Strip (Role, Timeline, Team) */}
-                  <div className="dossier-meta-strip">
-                    <div className="dossier-meta-cell">
-                      <span className="meta-label">ROLE</span>
-                      <span className="meta-value">{selectedProject.role}</span>
-                    </div>
-                    <div className="dossier-meta-cell">
-                      <span className="meta-label">TIMELINE</span>
-                      <span className="meta-value">{selectedProject.timeline}</span>
-                    </div>
-                    <div className="dossier-meta-cell">
-                      <span className="meta-label">COLLABORATION</span>
-                      <span className="meta-value">{selectedProject.team}</span>
-                    </div>
-                  </div>
-
-                  {/* Key Impact Metrics Callout Cards */}
-                  <div className="dossier-metrics-grid">
-                    {selectedProject.metrics.map((m, idx) => (
-                      <div key={idx} className="dossier-metric-card">
-                        <span className="metric-number">{m.val}</span>
-                        <span className="metric-caption">{m.label}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Detailed Breakdown Sections */}
-                  <div className="dossier-content-sections">
-                    {/* 01 // Overview */}
-                    <div className="dossier-section-block">
-                      <h4 className="dossier-section-heading">
-                        <span className="dossier-section-num">01</span>
-                        Project Overview
-                      </h4>
-                      <p className="dossier-text">
-                        {selectedProject.overview}
-                      </p>
-                    </div>
-
-                    {/* 02 // The Problem */}
-                    <div className="dossier-section-block">
-                      <h4 className="dossier-section-heading">
-                        <span className="dossier-section-num">02</span>
-                        The Problem & Context
-                      </h4>
-                      <p className="dossier-text">
-                        {selectedProject.problem}
-                      </p>
-                    </div>
-
-                    {/* 03 // The Solution & Architecture */}
-                    <div className="dossier-section-block">
-                      <h4 className="dossier-section-heading">
-                        <span className="dossier-section-num">03</span>
-                        The Solution & System Design
-                      </h4>
-                      <p className="dossier-text">
-                        {selectedProject.solution}
-                      </p>
-                    </div>
-
-                    {/* 04 // Highlights */}
-                    <div className="dossier-section-block">
-                      <h4 className="dossier-section-heading">
-                        <span className="dossier-section-num">04</span>
-                        Key Features & Highlights
-                      </h4>
-                      <ul className="dossier-highlights-list">
-                        {selectedProject.highlights.map((h, i) => (
-                          <li key={i} className="dossier-highlight-item">
-                            <CheckCircle2 size={16} className="highlight-check-icon" />
-                            <span>{h}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* 05 // Tech Stack */}
-                    <div className="dossier-section-block">
-                      <h4 className="dossier-section-heading">
-                        <span className="dossier-section-num">05</span>
-                        Technologies & Tools Used
-                      </h4>
-                      <div className="dossier-tech-pills">
-                        {selectedProject.tags.map((t) => (
-                          <span key={t} className="dossier-tech-pill">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Dossier Action Buttons / Footer */}
-                  <div className="dossier-footer-actions">
-                    <div className="dossier-links-group">
-                      <a 
-                        href={selectedProject.liveUrl} 
-                        target="_blank" 
-                        rel="noreferrer" 
-                        className="dossier-action-btn primary"
-                      >
-                        <ExternalLink size={16} />
-                        <span>Live Prototype</span>
-                      </a>
-                      <a 
-                        href={selectedProject.githubUrl} 
-                        target="_blank" 
-                        rel="noreferrer" 
-                        className="dossier-action-btn secondary"
-                      >
-                        <Code2 size={16} />
-                        <span>Source Code</span>
-                      </a>
-                      <a 
-                        href={selectedProject.figmaUrl} 
-                        target="_blank" 
-                        rel="noreferrer" 
-                        className="dossier-action-btn secondary"
-                      >
-                        <Layers size={16} />
-                        <span>Figma Design</span>
-                      </a>
-                    </div>
-
-                    <button 
-                      type="button" 
-                      className="dossier-action-btn close-text"
-                      onClick={() => setSelectedProject(null)}
-                    >
-                      Done Reading ✕
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </section>
 
         {/* ===================================================
@@ -1766,7 +1751,7 @@ export default function App() {
               <h2 className="experience-section-title">
                 Here's where I've <span className="highlight-pen-text">done it</span>
                 <svg className="experience-doodle-flag" width="28" height="22" viewBox="0 0 32 24" fill="none" aria-hidden="true">
-                  <path d="M4 22 L4 3 L20 3 C24 3, 24 9, 20 9 L4 9" stroke="#16a34a" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="rgba(22, 163, 74, 0.15)"/>
+                  <path d="M4 22 L4 3 L20 3 C24 3, 24 9, 20 9 L4 9" stroke="#16a34a" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="rgba(22, 163, 74, 0.15)" />
                 </svg>
               </h2>
               <p className="experience-section-subtitle">
@@ -1781,10 +1766,10 @@ export default function App() {
             <div className="experience-ledger-sheet">
               {/* Golden Paper Pin provided by user */}
               <div className="ledger-golden-pushpin-container" aria-hidden="true" title="Golden paper pin">
-                <img 
-                  src="/golden-paper-pin.png" 
-                  alt="Golden Paper Pin" 
-                  className="ledger-golden-paper-pin" 
+                <img
+                  src="/golden-paper-pin.png"
+                  alt="Golden Paper Pin"
+                  className="ledger-golden-paper-pin"
                 />
               </div>
 
@@ -1806,7 +1791,7 @@ export default function App() {
                   {experienceData.map((item) => {
                     const isSelected = activeExpId === item.id;
                     return (
-                      <div 
+                      <div
                         key={item.id}
                         className={`ledger-row ${isSelected ? 'active' : ''}`}
                         onClick={() => setActiveExpId(item.id)}
@@ -1841,8 +1826,8 @@ export default function App() {
                 <div className="ledger-table-footer">
                   <span className="ledger-footer-text">
                     Want to learn more?{' '}
-                    <a 
-                      href="#contact" 
+                    <a
+                      href="#contact"
                       className="ledger-resume-link"
                       onClick={(e) => {
                         e.preventDefault();
@@ -1863,7 +1848,7 @@ export default function App() {
 
             {/* Right Column: The Dynamic Color Memo Card with Foldback Binder Clip (Image 2) */}
             <div className="experience-card-container">
-              <div 
+              <div
                 key={activeExp.id}
                 className="experience-memo-card"
                 style={{
@@ -1874,10 +1859,10 @@ export default function App() {
                 {/* Foldback Binder Clip (Matching Image 2 Reference) */}
                 {/* Foldback Binder Clip (Matching Scrapbook Reference) */}
                 <div className="memo-binder-clip" aria-hidden="true" title="Foldback binder clip">
-                  <img 
-                    src="/pink-binder-clip.png?v=2" 
-                    alt="Paper binder clip" 
-                    className="memo-binder-clip-img" 
+                  <img
+                    src="/pink-binder-clip.png?v=2"
+                    alt="Paper binder clip"
+                    className="memo-binder-clip-img"
                   />
                 </div>
 
@@ -1931,17 +1916,17 @@ export default function App() {
           <div ref={deskRef} className="skills-desk-layout">
             {/* Left Column: Interactive Mint Pencil Pouch with Cute Charms */}
             <div className="skills-pouch-column">
-              <div 
+              <div
                 className={`skills-pouch-interactive-card ${isSkillsInView ? 'is-tilted-open' : 'is-resting'}`}
                 onClick={handlePouchClick}
                 title="Arpita's Pencil Pouch (Click for confetti!)"
               >
                 <div className="pouch-visual-wrapper">
                   {/* Soft Baby Pink Open Patterned Pencil Pouch Main Image */}
-                  <img 
-                    src="/pink-open-pouch.png" 
-                    alt="Arpita's Pink Open Patterned Pencil Pouch" 
-                    className="skills-pouch-sticker-img" 
+                  <img
+                    src="/pink-open-pouch.png"
+                    alt="Arpita's Pink Open Patterned Pencil Pouch"
+                    className="skills-pouch-sticker-img"
                   />
 
                   {/* Cute Dangling Keychain Charm attached to zipper slider */}
@@ -1953,7 +1938,7 @@ export default function App() {
                     </div>
                     <div className="charm-star-pendant" title="Star Charm">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="#fde047" stroke="#ca8a04" strokeWidth="1.5">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" strokeLinejoin="round"/>
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" strokeLinejoin="round" />
                         <circle cx="9.5" cy="11" r="1.1" fill="#713f12" />
                         <circle cx="14.5" cy="11" r="1.1" fill="#713f12" />
                         <path d="M10 13.5c.8.8 2.2.8 3 0" stroke="#713f12" strokeWidth="1.2" strokeLinecap="round" fill="none" />
@@ -1989,8 +1974,8 @@ export default function App() {
             <div className="skills-sticky-board">
               {skillCategoriesData.map((category) => {
                 return (
-                  <div 
-                    key={category.id} 
+                  <div
+                    key={category.id}
                     style={{
                       '--natural-rot': category.naturalRot
                     }}
@@ -2006,11 +1991,11 @@ export default function App() {
                     {/* 3. Wire Paperclip pinned on Top-Left (From Image 2) */}
                     <div className={`sticky-paperclip-graphic ${category.paperclipClass}`} aria-hidden="true">
                       <svg width="20" height="34" viewBox="0 0 20 34" fill="none">
-                        <path 
-                          d="M10 2C6.69 2 4 4.69 4 8v16c0 4.42 3.58 8 8 8s8-3.58 8-8V7c0-2.76-2.24-5-5-5s-5 2.24-5 5v17c0 1.1.9 2 2 2s2-.9 2-2V9" 
-                          stroke={category.paperclipStroke} 
-                          strokeWidth="2.6" 
-                          strokeLinecap="round" 
+                        <path
+                          d="M10 2C6.69 2 4 4.69 4 8v16c0 4.42 3.58 8 8 8s8-3.58 8-8V7c0-2.76-2.24-5-5-5s-5 2.24-5 5v17c0 1.1.9 2 2 2s2-.9 2-2V9"
+                          stroke={category.paperclipStroke}
+                          strokeWidth="2.6"
+                          strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                       </svg>
@@ -2019,7 +2004,7 @@ export default function App() {
                     {/* 4. Heart Sticky Index Tab peeking at Top-Right (From Image 2) */}
                     <div className="sticky-heart-sticker-tab" aria-hidden="true">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill={category.tabHeartColor}>
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                       </svg>
                     </div>
 
@@ -2037,17 +2022,17 @@ export default function App() {
                     <span className="sticky-corner-doodle top-left-sparkle" aria-hidden="true">彡</span>
                     <div className="sticky-corner-doodle top-right-star" aria-hidden="true">
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l2.6 6.8L22 9.5l-5.3 4.6 1.6 7.2L12 17.6 5.7 21.3l1.6-7.2L2 9.5l7.4-.7L12 2z"/>
+                        <path d="M12 2l2.6 6.8L22 9.5l-5.3 4.6 1.6 7.2L12 17.6 5.7 21.3l1.6-7.2L2 9.5l7.4-.7L12 2z" />
                       </svg>
                     </div>
                     <div className="sticky-corner-doodle bottom-left-star" aria-hidden="true">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l2.6 6.8L22 9.5l-5.3 4.6 1.6 7.2L12 17.6 5.7 21.3l1.6-7.2L2 9.5l7.4-.7L12 2z"/>
+                        <path d="M12 2l2.6 6.8L22 9.5l-5.3 4.6 1.6 7.2L12 17.6 5.7 21.3l1.6-7.2L2 9.5l7.4-.7L12 2z" />
                       </svg>
                     </div>
                     <div className="sticky-corner-doodle bottom-right-heart" aria-hidden="true">
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                       </svg>
                     </div>
 
@@ -2065,7 +2050,7 @@ export default function App() {
                         <div key={sIdx} className="sticky-ruled-line-row">
                           <span className="ruled-line-bullet" aria-hidden="true">
                             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z"/>
+                              <path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z" />
                             </svg>
                           </span>
                           <div className="ruled-line-content">
@@ -2089,27 +2074,27 @@ export default function App() {
           {/* 1. Scalloped Paper Arch Divider Trim (from Image 5 Vardhanika) */}
           <div className="footer-scallop-divider" aria-hidden="true">
             <svg viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none">
-              <path 
+              <path
                 d="M0,0 
                    Q 30,36 60,0 Q 90,36 120,0 Q 150,36 180,0 Q 210,36 240,0 Q 270,36 300,0
                    Q 330,36 360,0 Q 390,36 420,0 Q 450,36 480,0 Q 510,36 540,0 Q 570,36 600,0
                    Q 630,36 660,0 Q 690,36 720,0 Q 750,36 780,0 Q 810,36 840,0 Q 870,36 900,0
                    Q 930,36 960,0 Q 990,36 1020,0 Q 1050,36 1080,0 Q 1110,36 1140,0 Q 1170,36 1200,0
                    Q 1230,36 1260,0 Q 1290,36 1320,0 Q 1350,36 1380,0 Q 1410,36 1440,0
-                   L 1440,48 L 0,48 Z" 
-                fill="#fcf8f0" 
+                   L 1440,48 L 0,48 Z"
+                fill="#fcf8f0"
               />
-              <path 
+              <path
                 d="M0,0 
                    Q 30,36 60,0 Q 90,36 120,0 Q 150,36 180,0 Q 210,36 240,0 Q 270,36 300,0
                    Q 330,36 360,0 Q 390,36 420,0 Q 450,36 480,0 Q 510,36 540,0 Q 570,36 600,0
                    Q 630,36 660,0 Q 690,36 720,0 Q 750,36 780,0 Q 810,36 840,0 Q 870,36 900,0
                    Q 930,36 960,0 Q 990,36 1020,0 Q 1050,36 1080,0 Q 1110,36 1140,0 Q 1170,36 1200,0
-                   Q 1230,36 1260,0 Q 1290,36 1320,0 Q 1350,36 1380,0 Q 1410,36 1440,0" 
-                stroke="#ebdccb" 
-                strokeWidth="1.8" 
-                strokeDasharray="4 3" 
-                fill="none" 
+                   Q 1230,36 1260,0 Q 1290,36 1320,0 Q 1350,36 1380,0 Q 1410,36 1440,0"
+                stroke="#ebdccb"
+                strokeWidth="1.8"
+                strokeDasharray="4 3"
+                fill="none"
               />
             </svg>
           </div>
@@ -2123,10 +2108,10 @@ export default function App() {
             {/* Vintage Newspaper Cutout: Upper Corner of Container (Top-Left) */}
             <div className="footer-corner-cutout cutout-above" aria-hidden="true">
               <div className="corner-washi-tape tape-top" />
-              <img 
-                src="/stickers/ephemera-newspaper-butterfly.png" 
-                alt="Vintage newspaper clipping with butterfly" 
-                className="corner-newspaper-img" 
+              <img
+                src="/stickers/ephemera-newspaper-butterfly.png"
+                alt="Vintage newspaper clipping with butterfly"
+                className="corner-newspaper-img"
                 title="Vintage newspaper 📰"
               />
             </div>
@@ -2137,7 +2122,7 @@ export default function App() {
                 <span className="script-text">still here? thanks for wandering all the way down ✎</span>
                 <span className="footer-sparkle-doodle">✦</span>
               </div>
-              
+
               <h2 className="footer-main-title">
                 Let's connect & <span className="script-highlight">make something intentional.</span>
               </h2>
@@ -2155,23 +2140,23 @@ export default function App() {
 
             {/* 3. The Main Scrapbook Desk Composition: Side-by-Side Asymmetric Stationery Showcase */}
             <div className="footer-desk-composition">
-              
+
               {/* Coffee ring stain on desk */}
               <div className="desk-coffee-stain" aria-hidden="true" />
 
               {/* OBJECT 1 (LEFT): Compact Archival Photo Specimen Tag (Shortened Content & Unique Chamfered Shape) */}
               <div className="footer-photo-specimen-card" style={{ '--card-tilt': '-3deg' }}>
-                
+
                 {/* Brass Grommet & Twine Loop at top */}
                 <div className="specimen-tag-twine" aria-hidden="true" />
                 <div className="specimen-tag-grommet" aria-hidden="true" />
 
                 {/* Vintage Curved Brass Bulldog Clip (From User Clip Sheet) */}
-                <img 
-                  src="/stickers/clip-vintage-brass.png" 
-                  alt="Vintage brass bulldog clip" 
-                  className="specimen-brass-clamp" 
-                  aria-hidden="true" 
+                <img
+                  src="/stickers/clip-vintage-brass.png"
+                  alt="Vintage brass bulldog clip"
+                  className="specimen-brass-clamp"
+                  aria-hidden="true"
                   title="Vintage brass clamp 📎"
                 />
 
@@ -2205,10 +2190,10 @@ export default function App() {
 
                   {/* Arpita's Portrait Polaroid */}
                   <div className="specimen-polaroid-frame">
-                    <img 
-                      src="/arpita-portrait.jpg" 
-                      alt="Arpita Jadhav" 
-                      className="specimen-portrait-img" 
+                    <img
+                      src="/arpita-portrait.jpg"
+                      alt="Arpita Jadhav"
+                      className="specimen-portrait-img"
                     />
                     <div className="specimen-polaroid-caption">
                       <span className="specimen-name">Arpita Jadhav ✦</span>
@@ -2226,11 +2211,11 @@ export default function App() {
                   {/* Bottom Doodled Conversation Memo */}
                   <div className="specimen-footer-memo">
                     <span className="specimen-memo-text">P.S. Always open for good conversations ✦</span>
-                    <img 
-                      src="/stickers/sticker-teacup.png" 
-                      alt="Vintage porcelain teacup sticker" 
-                      className="specimen-teacup-sticker" 
-                      aria-hidden="true" 
+                    <img
+                      src="/stickers/sticker-teacup.png"
+                      alt="Vintage porcelain teacup sticker"
+                      className="specimen-teacup-sticker"
+                      aria-hidden="true"
                       title="Good conversations ✦"
                     />
                   </div>
@@ -2239,7 +2224,7 @@ export default function App() {
 
               {/* OBJECT 2 (RIGHT): The Hero Conversation & Mail Station (Focal Point!) */}
               <div className="footer-terracotta-envelope" style={{ '--envelope-tilt': '1.5deg' }}>
-                
+
                 {/* Woven Triangular Envelope Flap */}
                 <div className="envelope-v-flap" aria-hidden="true" />
 
@@ -2247,30 +2232,30 @@ export default function App() {
                 <div className="envelope-stitching" aria-hidden="true" />
 
                 {/* Pink Embossed Wax Seal on Top-Left */}
-                <img 
-                  src="/stickers/wax-seal.svg" 
-                  alt="Wax seal stamp" 
-                  className="envelope-wax-seal-badge" 
-                  aria-hidden="true" 
+                <img
+                  src="/stickers/wax-seal.svg"
+                  alt="Wax seal stamp"
+                  className="envelope-wax-seal-badge"
+                  aria-hidden="true"
                 />
 
                 {/* Olive Green Thank You Label Sticker (From User Sticker Sheet) */}
-                <img 
-                  src="/stickers/sticker-thank-you.png" 
-                  alt="Thank you for existing sticker" 
-                  className="envelope-thankyou-sticker" 
-                  aria-hidden="true" 
+                <img
+                  src="/stickers/sticker-thank-you.png"
+                  alt="Thank you for existing sticker"
+                  className="envelope-thankyou-sticker"
+                  aria-hidden="true"
                   title="Thank you for existing 🌿"
                 />
 
                 {/* Letter Sheet peeking from envelope pocket */}
                 <div className="envelope-letter-sheet">
                   {/* Ruby Jewel Heart Paperclip (From User Clip Sheet) */}
-                  <img 
-                    src="/stickers/clip-heart-ruby.png" 
-                    alt="Ruby jewel heart paperclip" 
-                    className="letter-ruby-clip" 
-                    aria-hidden="true" 
+                  <img
+                    src="/stickers/clip-heart-ruby.png"
+                    alt="Ruby jewel heart paperclip"
+                    className="letter-ruby-clip"
+                    aria-hidden="true"
                     title="Heart paperclip 💖"
                   />
 
@@ -2288,10 +2273,10 @@ export default function App() {
                   </p>
 
                   {/* One-Click Copy Email Ribbon */}
-                  <div 
-                    className="letter-email-ribbon" 
-                    onClick={handleCopyEmail} 
-                    role="button" 
+                  <div
+                    className="letter-email-ribbon"
+                    onClick={handleCopyEmail}
+                    role="button"
                     tabIndex={0}
                     title="Click to copy email address"
                     onKeyDown={(e) => {
@@ -2307,9 +2292,9 @@ export default function App() {
                       </div>
                       <span className="letter-email-text">arpitajadhav9@gmail.com</span>
                     </div>
-                    <button 
-                      type="button" 
-                      className="letter-copy-btn" 
+                    <button
+                      type="button"
+                      className="letter-copy-btn"
                       aria-label="Copy email address"
                     >
                       {emailCopied ? (
@@ -2317,8 +2302,8 @@ export default function App() {
                       ) : (
                         <span className="letter-copy-label">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                           </svg>
                           Copy
                         </span>
@@ -2346,11 +2331,11 @@ export default function App() {
                 </div>
 
                 {/* Silk Ribbon Bow Sticker (From User Sticker Sheet - Replaces repeated butterfly!) */}
-                <img 
-                  src="/stickers/sticker-ribbon-bow.png" 
-                  alt="Silk ribbon bow sticker" 
-                  className="envelope-ribbon-decor" 
-                  aria-hidden="true" 
+                <img
+                  src="/stickers/sticker-ribbon-bow.png"
+                  alt="Silk ribbon bow sticker"
+                  className="envelope-ribbon-decor"
+                  aria-hidden="true"
                   title="Vintage ribbon bow 🎀"
                 />
               </div>
@@ -2377,7 +2362,7 @@ export default function App() {
                 <div className="social-pills-list">
                   <a href="https://github.com/arpitajadhav" target="_blank" rel="noreferrer" className="footer-social-pill">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                     </svg>
                     <span>GITHUB</span>
                     <span className="pill-arrow">↗</span>
@@ -2385,7 +2370,7 @@ export default function App() {
 
                   <a href="https://linkedin.com/in/arpitajadhav" target="_blank" rel="noreferrer" className="footer-social-pill">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
                     <span>LINKEDIN</span>
                     <span className="pill-arrow">↗</span>
@@ -2393,7 +2378,7 @@ export default function App() {
 
                   <a href="https://twitter.com" target="_blank" rel="noreferrer" className="footer-social-pill">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                     </svg>
                     <span>TWITTER</span>
                     <span className="pill-arrow">↗</span>
@@ -2409,10 +2394,10 @@ export default function App() {
 
               {/* Right: Scroll To Top Button (strictly on the same row!) */}
               <div className="footer-scroll-top-col">
-                <button 
-                  onClick={scrollToTop} 
-                  className="scroll-to-top-btn" 
-                  title="Back to top" 
+                <button
+                  onClick={scrollToTop}
+                  className="scroll-to-top-btn"
+                  title="Back to top"
                   aria-label="Back to top"
                 >
                   <span className="arrow-up-icon">↑</span>
@@ -2424,10 +2409,10 @@ export default function App() {
             {/* Vintage Newspaper Cutout: Lower Corner of Container (Bottom-Right) */}
             <div className="footer-corner-cutout cutout-below" aria-hidden="true">
               <div className="corner-washi-tape tape-bottom" />
-              <img 
-                src="/stickers/ephemera-antique-manuscript.png" 
-                alt="Vintage newsprint article column" 
-                className="corner-newspaper-img" 
+              <img
+                src="/stickers/ephemera-antique-manuscript.png"
+                alt="Vintage newsprint article column"
+                className="corner-newspaper-img"
                 title="Vintage newsprint 📰"
               />
             </div>
@@ -2446,6 +2431,223 @@ export default function App() {
           </div>
         </footer>
       </main>
+
+      {/* ===================================================
+          INTERACTIVE PROJECT CASE STUDY DOSSIER (Portal to body: Highest Layer, Zero Stacking Bleed)
+          =================================================== */}
+      {selectedProject && typeof document !== 'undefined' && createPortal(
+        <div
+          className="project-dossier-overlay"
+          onClick={() => setSelectedProject(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-project-title"
+        >
+          <div
+            className="project-dossier-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Scrapbook Top Washi Tape Accent */}
+            <div className="dossier-washi-tape" aria-hidden="true" />
+
+            {/* Dossier Header Bar */}
+            <header className="dossier-header-bar">
+              <div className="dossier-header-meta">
+                <span className="dossier-badge">
+                  CASE STUDY DOSSIER • {selectedProject.shortCategory}
+                </span>
+                <h3 id="modal-project-title" className="dossier-title">
+                  {selectedProject.title}
+                </h3>
+              </div>
+
+              <button
+                type="button"
+                className="dossier-close-btn"
+                onClick={() => setSelectedProject(null)}
+                title="Close case study (Esc)"
+                aria-label="Close case study"
+              >
+                <X size={20} />
+              </button>
+            </header>
+
+            {/* Scrollable Dossier Body */}
+            <div className="dossier-scroll-body">
+              {/* Hero Visual Preview */}
+              <div className="dossier-hero-preview">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="dossier-hero-img"
+                />
+              </div>
+
+              {/* Quick Meta Strip (Role, Timeline, Team) */}
+              <div className="dossier-meta-strip">
+                <div className="dossier-meta-cell">
+                  <span className="meta-label">ROLE</span>
+                  <span className="meta-value">{selectedProject.role}</span>
+                </div>
+                <div className="dossier-meta-cell">
+                  <span className="meta-label">TIMELINE</span>
+                  <span className="meta-value">{selectedProject.timeline}</span>
+                </div>
+                <div className="dossier-meta-cell">
+                  <span className="meta-label">COLLABORATION</span>
+                  <span className="meta-value">{selectedProject.team}</span>
+                </div>
+              </div>
+
+              {/* Key Impact Metrics Callout Cards */}
+              <div className="dossier-metrics-grid">
+                {selectedProject.metrics.map((m, idx) => (
+                  <div key={idx} className="dossier-metric-card">
+                    <span className="metric-number">{m.val}</span>
+                    <span className="metric-caption">{m.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Detailed Breakdown Sections */}
+              <div className="dossier-content-sections">
+                {/* 01 // Overview */}
+                <div className="dossier-section-block">
+                  <h4 className="dossier-section-heading">
+                    <span className="dossier-section-num">01</span>
+                    Project Overview
+                  </h4>
+                  <p className="dossier-text">
+                    {selectedProject.overview}
+                  </p>
+                </div>
+
+                {/* 02 // The Problem */}
+                <div className="dossier-section-block">
+                  <h4 className="dossier-section-heading">
+                    <span className="dossier-section-num">02</span>
+                    The Problem & Context
+                  </h4>
+                  <p className="dossier-text">
+                    {selectedProject.problem}
+                  </p>
+                </div>
+
+                {/* 03 // The Solution & Architecture */}
+                <div className="dossier-section-block">
+                  <h4 className="dossier-section-heading">
+                    <span className="dossier-section-num">03</span>
+                    The Solution & System Design
+                  </h4>
+                  <p className="dossier-text">
+                    {selectedProject.solution}
+                  </p>
+                </div>
+
+                {/* 04 // Highlights */}
+                <div className="dossier-section-block">
+                  <h4 className="dossier-section-heading">
+                    <span className="dossier-section-num">04</span>
+                    Key Features & Highlights
+                  </h4>
+                  <ul className="dossier-highlights-list">
+                    {selectedProject.highlights.map((h, i) => (
+                      <li key={i} className="dossier-highlight-item">
+                        <CheckCircle2 size={16} className="highlight-check-icon" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* 05 // Tech Stack */}
+                <div className="dossier-section-block">
+                  <h4 className="dossier-section-heading">
+                    <span className="dossier-section-num">05</span>
+                    Technologies & Tools Used
+                  </h4>
+                  <div className="dossier-tech-pills">
+                    {selectedProject.tags.map((t) => (
+                      <span key={t} className="dossier-tech-pill">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 06 // Challenges & How I Solved Them (Optional for rich case studies) */}
+                {selectedProject.challenges && selectedProject.challenges.length > 0 && (
+                  <div className="dossier-section-block">
+                    <h4 className="dossier-section-heading">
+                      <span className="dossier-section-num">06</span>
+                      Challenges & How I Solved Them
+                    </h4>
+                    <div className="dossier-challenges-grid">
+                      {selectedProject.challenges.map((c, i) => (
+                        <div key={i} className="dossier-challenge-item">
+                          <h5 className="challenge-item-title">
+                            <span className="challenge-bullet">✦</span>
+                            {c.title}
+                          </h5>
+                          <p className="challenge-item-desc">{c.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Dossier Action Buttons / Footer */}
+              <div className="dossier-footer-actions">
+                <div className="dossier-links-group">
+                  {selectedProject.liveUrl && (
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="dossier-action-btn primary"
+                    >
+                      <ExternalLink size={16} />
+                      <span>Live Prototype</span>
+                    </a>
+                  )}
+                  {selectedProject.githubUrl && (
+                    <a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`dossier-action-btn ${!selectedProject.liveUrl ? 'primary' : 'secondary'}`}
+                    >
+                      <Code2 size={16} />
+                      <span>View on GitHub</span>
+                    </a>
+                  )}
+                  {selectedProject.figmaUrl && (
+                    <a
+                      href={selectedProject.figmaUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="dossier-action-btn secondary"
+                    >
+                      <Layers size={16} />
+                      <span>Figma Design</span>
+                    </a>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  className="dossier-action-btn close-text"
+                  onClick={() => setSelectedProject(null)}
+                >
+                  Done Reading ✕
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

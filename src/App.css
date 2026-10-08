@@ -1316,9 +1316,9 @@
 
 .scrapbook-about-section {
   width: 100%;
-  max-width: 1280px;
-  margin: 60px auto 90px;
-  padding: 30px 24px 0;
+  max-width: 1360px;
+  margin: 50px auto 85px;
+  padding: 20px 24px 0;
   position: relative;
   z-index: 10;
   box-sizing: border-box;
@@ -1327,7 +1327,7 @@
 
 @media (min-width: 768px) {
   .scrapbook-about-section {
-    padding: 0 40px;
+    padding: 0 24px;
   }
 }
 
@@ -1408,20 +1408,25 @@
 /* ======================================================== */
 /* SCRAPBOOK CANVAS: 4 DISTINCT STATIONERY CUTOUT DESIGNS   */
 /* ======================================================== */
+/* ======================================================== */
+/* SCRAPBOOK CANVAS: 4 DISTINCT STATIONERY CUTOUT DESIGNS   */
+/* ======================================================== */
 .about-scrapbook-canvas {
   display: grid;
-  grid-template-columns: 295px minmax(340px, 420px) 295px;
-  gap: 24px;
+  grid-template-columns: minmax(310px, 345px) minmax(380px, 440px) minmax(310px, 345px);
+  gap: 36px 48px;
   align-items: center;
   justify-content: center;
   position: relative;
   margin: 0 auto;
+  width: 100%;
+  max-width: 1260px;
 }
 
 .about-canvas-flank {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 34px;
   position: relative;
   z-index: 5;
 }
@@ -1445,31 +1450,49 @@
 }
 
 /* -------------------------------------------------------- */
-/* 1. NOTE 1: DECKLE TORN PAPER & PERIWINKLE (Photo 3 Top) */
+/* 1. NOTE 1: HAND-TORN DECKLE PAPER & PERIWINKLE BACKING   */
 /* -------------------------------------------------------- */
 .cutout-deckle-paper {
   width: 100%;
+  position: relative;
+  filter: drop-shadow(0 10px 24px rgba(45, 35, 25, 0.08)) drop-shadow(0 2px 6px rgba(45, 35, 25, 0.04));
 }
 
 .deckle-backing-sheet {
   position: absolute;
-  inset: -3px -3px -4px -4px;
-  background: #d6e2ee;
-  border-radius: 12px 18px 10px 16px;
-  transform: rotate(-3.2deg) translate(-4px, 3px);
+  inset: -5px -6px -7px -5px;
+  background: #e2e8f8;
+  background-image: 
+    radial-gradient(rgba(99, 102, 241, 0.14) 1px, transparent 1px);
+  background-size: 8px 8px;
+  border-radius: 4px;
+  transform: rotate(-3deg) translate(-4px, 3px);
   z-index: 1;
-  box-shadow: 0 4px 14px rgba(45, 55, 72, 0.08);
-  border: 1px solid rgba(186, 206, 226, 0.7);
+  border: 1px dashed rgba(165, 180, 252, 0.7);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.12);
+  clip-path: polygon(
+    0% 2px, 8% 0px, 16% 3px, 25% 1px, 35% 3px, 46% 1px, 58% 3px, 70% 1px, 82% 3px, 92% 0px, 100% 2px,
+    98.5% 8%, 100% 16%, 98.8% 26%, 100% 36%, 98.6% 46%, 100% 56%, 98.7% 68%, 100% 78%, 98.5% 88%, 100% 98%,
+    92% 100%, 82% 98.8%, 72% 100%, 62% 98.6%, 50% 100%, 38% 98.8%, 26% 100%, 14% 98.7%, 0% 100%,
+    1.2% 90%, 0% 78%, 1.2% 66%, 0% 54%, 1% 42%, 0% 30%, 1.2% 18%, 0% 6%
+  );
 }
 
 .deckle-front-sheet {
   position: relative;
-  background: #ffffff;
-  border: 1px solid #ebdccb;
-  border-radius: 10px 16px 8px 14px;
-  padding: 22px 20px 18px 22px;
+  background: #fdfdfc;
+  background-image: 
+    radial-gradient(rgba(180, 160, 140, 0.09) 1px, transparent 1px);
+  background-size: 14px 14px;
+  border: 1px solid rgba(224, 212, 198, 0.8);
+  padding: 24px 22px 20px 22px;
   z-index: 2;
-  box-shadow: 0 10px 26px rgba(50, 40, 30, 0.07), 0 2px 6px rgba(50, 40, 30, 0.04);
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    99.2% 4%, 100% 9%, 98.7% 16%, 99.8% 23%, 98.6% 31%, 99.7% 39%, 98.8% 47%, 99.9% 55%, 98.7% 63%, 99.6% 71%, 98.9% 79%, 99.8% 87%, 98.6% 93%, 100% 100%,
+    95% 99.1%, 87% 99.8%, 79% 98.7%, 71% 99.7%, 63% 98.8%, 55% 99.8%, 47% 98.7%, 39% 99.7%, 31% 98.8%, 23% 99.8%, 15% 98.9%, 7% 99.7%, 0% 100%,
+    0.8% 92%, 0% 84%, 0.8% 76%, 0.2% 68%, 1% 60%, 0.2% 52%, 0.8% 44%, 0% 36%, 0.8% 28%, 0.2% 20%, 0.8% 12%, 0% 4%
+  );
 }
 
 .cutout-paperclip {
@@ -1492,7 +1515,7 @@
 }
 
 /* -------------------------------------------------------- */
-/* 2. NOTE 2: VINTAGE BRASS CLIPBOARD NOTE (Photo 2 Bottom) */
+/* 2. NOTE 2: VINTAGE CANARY YELLOW LEGAL PAD & BRASS CLAMP */
 /* -------------------------------------------------------- */
 .cutout-clipboard-note {
   width: 100%;
@@ -1544,21 +1567,35 @@
   filter: drop-shadow(0 2px 4px rgba(202, 138, 4, 0.4));
 }
 
-/* Main Clipboard Lined Notepad Sheet */
+/* Main Clipboard Lined Notepad Sheet - Canary Yellow Legal Pad */
 .clipboard-sheet-body {
   position: relative;
-  background: #fdfbf5;
-  border: 1px solid #ebdccb;
-  border-radius: 8px 8px 0 0;
+  background: #fef9db;
+  border: 1px solid #ebd9a2;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
   padding: 24px 18px 24px;
-  box-shadow: 0 10px 26px rgba(50, 35, 20, 0.07), 0 2px 6px rgba(50, 35, 20, 0.04);
+  box-shadow: 0 10px 26px rgba(50, 35, 20, 0.08), 0 2px 6px rgba(50, 35, 20, 0.04);
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0px,
     transparent 23px,
-    rgba(215, 195, 175, 0.38) 24px
+    rgba(96, 165, 250, 0.22) 24px
   );
   background-size: 100% 24px;
+}
+
+/* Classic Double Red Margin Line on Legal Pad */
+.legal-pad-margin-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  width: 4px;
+  border-left: 1.5px solid rgba(239, 68, 68, 0.42);
+  border-right: 1px solid rgba(239, 68, 68, 0.22);
+  pointer-events: none;
+  z-index: 4;
 }
 
 /* Left Margin Punch Holes */
@@ -1572,33 +1609,33 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 3;
+  z-index: 5;
 }
 
 .clipboard-punch-hole {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #eee5d8;
-  box-shadow: inset 0 1px 2px rgba(60, 45, 30, 0.25);
+  background: #eee0c8;
+  box-shadow: inset 0 1.5px 3px rgba(60, 45, 30, 0.35);
   display: block;
 }
 
 .pl-punch {
-  padding-left: 16px;
+  padding-left: 20px;
 }
 
 .torn-bottom-svg {
   position: absolute;
-  bottom: -15px;
+  bottom: -17px;
   left: -1px;
   width: calc(100% + 2px);
-  height: 16px;
+  height: 18px;
   z-index: 3;
 }
 
 /* -------------------------------------------------------- */
-/* 3. NOTE 3: BOTANICAL HERBARIUM NOTE (User Photo 4)       */
+/* 3. NOTE 3: SPIRAL SKETCHBOOK PAGE WITH DRAFTING GRID     */
 /* -------------------------------------------------------- */
 .cutout-botanical-card {
   width: 100%;
@@ -1638,55 +1675,89 @@
   );
 }
 
-/* Cafe Cream Card Body with Double Frame & Ruled Lines */
+/* Wire-Bound Sketchbook Body */
 .botanical-card-body {
   position: relative;
   z-index: 2;
-  background: #fcf8f2;
+  background: #fdfbf7;
   border: 1px solid #dfd3c3;
-  border-radius: 14px;
-  padding: 6px;
-  box-shadow: 0 10px 26px rgba(60, 45, 30, 0.07), 0 2px 6px rgba(50, 35, 20, 0.04);
+  border-radius: 12px;
+  padding: 8px 8px 12px;
+  box-shadow: 0 10px 26px rgba(60, 45, 30, 0.08), 0 2px 6px rgba(50, 35, 20, 0.04);
 }
 
+/* Spiral Wire Punch Header with Perforated Tear Line */
+.sketchbook-spiral-header {
+  position: relative;
+  width: 100%;
+  padding: 4px 6px 8px;
+  margin-bottom: 4px;
+}
+
+.spiral-holes-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 6px;
+}
+
+.spiral-wire-hole {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #dfcfb9;
+  box-shadow: inset 0 1.5px 2px rgba(45, 30, 15, 0.32);
+  display: inline-block;
+}
+
+.spiral-perf-line {
+  margin-top: 6px;
+  width: 100%;
+  border-bottom: 1.5px dashed rgba(196, 168, 142, 0.55);
+}
+
+/* Inner Page with Blueprint / Drafting Graph Grid */
 .botanical-card-inner {
-  background: #fffefb;
+  background: #ffffff;
   border: 1px solid #ebd9c5;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 16px 16px;
-  outline: 1px solid #ebd9c5;
-  outline-offset: -5px;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 23px,
-    rgba(196, 168, 142, 0.22) 24px
-  );
-  background-size: 100% 24px;
+  background-image: 
+    linear-gradient(rgba(13, 148, 136, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 148, 136, 0.12) 1px, transparent 1px);
+  background-size: 14px 14px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 /* -------------------------------------------------------- */
-/* 4. NOTE 4: RED GINGHAM & WAX SEAL ENVELOPE (Photo 2 Mid) */
+/* 4. NOTE 4: SCALLOPED AEROGRAMME CARD ON GINGHAM FABRIC   */
 /* -------------------------------------------------------- */
 .cutout-gingham-envelope {
   width: 100%;
   position: relative;
 }
 
-/* Woven Red Gingham Fabric Backing */
+/* Woven Red Gingham Fabric Backing with Pinked Sawtooth Edges */
 .gingham-fabric-backing {
   position: absolute;
-  inset: -6px -6px -8px -6px;
-  background-color: #fbf7ee;
+  inset: -7px -7px -9px -7px;
+  background-color: #fffaf5;
   background-image: 
-    linear-gradient(90deg, rgba(225, 29, 72, 0.16) 50%, transparent 50%),
-    linear-gradient(rgba(225, 29, 72, 0.16) 50%, transparent 50%);
-  background-size: 20px 20px;
-  border: 1px solid rgba(225, 29, 72, 0.25);
+    linear-gradient(90deg, rgba(225, 29, 72, 0.18) 50%, transparent 50%),
+    linear-gradient(rgba(225, 29, 72, 0.18) 50%, transparent 50%);
+  background-size: 18px 18px;
+  border: 1px solid rgba(225, 29, 72, 0.28);
   border-radius: 14px;
-  transform: rotate(1.8deg);
+  transform: rotate(2deg);
   z-index: 1;
-  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.08);
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.1);
+  clip-path: polygon(
+    0% 0%, 5% 2px, 10% 0%, 15% 2px, 20% 0%, 25% 2px, 30% 0%, 35% 2px, 40% 0%, 45% 2px, 50% 0%, 55% 2px, 60% 0%, 65% 2px, 70% 0%, 75% 2px, 80% 0%, 85% 2px, 90% 0%, 95% 2px, 100% 0%,
+    98% 5%, 100% 10%, 98% 15%, 100% 20%, 98% 25%, 100% 30%, 98% 35%, 100% 40%, 98% 45%, 100% 50%, 98% 55%, 100% 60%, 98% 65%, 100% 70%, 98% 75%, 100% 80%, 98% 85%, 100% 90%, 98% 95%, 100% 100%,
+    95% 98%, 90% 100%, 85% 98%, 80% 100%, 75% 98%, 70% 100%, 65% 98%, 60% 100%, 55% 98%, 50% 100%, 45% 98%, 40% 100%, 35% 98%, 30% 100%, 25% 98%, 20% 100%, 15% 98%, 10% 100%, 5% 98%, 0% 100%,
+    2% 95%, 0% 90%, 2% 85%, 0% 80%, 2% 75%, 0% 70%, 2% 65%, 0% 60%, 2% 55%, 0% 50%, 2% 45%, 0% 40%, 2% 35%, 0% 30%, 2% 25%, 0% 20%, 2% 15%, 0% 10%, 2% 5%
+  );
 }
 
 /* Kraft Envelope Flap peaking from behind */
@@ -1725,11 +1796,37 @@
 .gingham-letter-card {
   position: relative;
   z-index: 3;
-  background: #fffefb;
-  border: 1px solid #ebdccb;
+  background: #fffdfb;
+  border: 1.5px solid #fecdd3;
   border-radius: 12px;
-  padding: 20px 18px 18px;
-  box-shadow: 0 10px 26px rgba(50, 35, 20, 0.08);
+  padding: 22px 20px 20px;
+  box-shadow: 0 10px 26px rgba(190, 18, 60, 0.08), 0 2px 6px rgba(50, 35, 20, 0.04);
+  outline: 1px dashed rgba(225, 29, 72, 0.28);
+  outline-offset: -6px;
+}
+
+/* Aerogramme corner stamp accents */
+.aerogramme-corner-accent {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: #f43f5e;
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0.55;
+  z-index: 4;
+}
+
+.aerogramme-corner-accent.top-left {
+  top: 9px;
+  left: 9px;
+  border-width: 2px 0 0 2px;
+}
+
+.aerogramme-corner-accent.bottom-right {
+  bottom: 9px;
+  right: 9px;
+  border-width: 0 2px 2px 0;
 }
 
 .badge-rose {
@@ -1976,13 +2073,13 @@
 .top-doodle {
   top: -24px;
   right: 14px;
-  transform: rotate(4deg);
+  transform: rotate(3deg);
 }
 
 .bottom-doodle {
-  bottom: -24px;
-  left: 10px;
-  transform: rotate(-3deg);
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
   color: #b45309;
 }
 
@@ -2003,43 +2100,43 @@
   z-index: 25;
 }
 
-/* 1. Retro Fujifilm Instax Camera (Bottom-right of photo stack) */
+/* 1. Retro Fujifilm Instax Camera (On Note 3: The Maker, bottom-left) */
 .sticker-instax-camera {
-  bottom: -20px;
-  right: -20px;
-  width: 86px;
+  bottom: -16px;
+  left: -14px;
+  width: 70px;
   height: auto;
-  transform: rotate(7deg);
+  transform: rotate(-7deg);
 }
 
 .sticker-instax-camera:hover {
-  transform: rotate(4deg) scale(1.1) translateY(-4px) !important;
+  transform: rotate(-3deg) scale(1.1) translateY(-4px) !important;
 }
 
-/* 2. Indian Classical Dance Feet with Ghungroos & Alta (Bottom-left of photo stack) */
+/* 2. Indian Classical Dance Feet with Ghungroos & Alta (On Note 4: Core Belief, bottom-left) */
 .sticker-dance-feet {
-  bottom: -30px;
-  left: -28px;
-  width: 74px;
+  bottom: -16px;
+  left: -14px;
+  width: 64px;
   height: auto;
-  transform: rotate(-8deg);
+  transform: rotate(-6deg);
 }
 
 .sticker-dance-feet:hover {
-  transform: rotate(-5deg) scale(1.1) translateY(-4px) !important;
+  transform: rotate(-2deg) scale(1.1) translateY(-4px) !important;
 }
 
-/* 3. French Fries Carton with Heart (On Note 2: Street Food Explorer) */
+/* 3. French Fries Carton with Heart (On Note 2: Bottom-left outer corner) */
 .sticker-french-fries {
-  bottom: -12px;
-  right: -12px;
+  bottom: -14px;
+  left: -12px;
   width: 58px;
   height: auto;
-  transform: rotate(12deg);
+  transform: rotate(-10deg);
 }
 
 .sticker-french-fries:hover {
-  transform: rotate(8deg) scale(1.12) translateY(-3px) !important;
+  transform: rotate(-6deg) scale(1.12) translateY(-3px) !important;
 }
 
 
@@ -2285,21 +2382,27 @@
 
   /* Responsive Decor Stickers on Mobile */
   .sticker-instax-camera {
-    width: 72px;
-    right: -10px;
-    bottom: -16px;
+    width: 60px;
+    bottom: -12px;
+    left: -10px;
+    top: auto;
+    right: auto;
   }
 
   .sticker-dance-feet {
-    width: 64px;
+    width: 54px;
+    bottom: -12px;
     left: -10px;
-    bottom: -18px;
+    top: auto;
+    right: auto;
   }
 
   .sticker-french-fries {
-    width: 52px;
-    right: -8px;
-    bottom: -6px;
+    width: 48px;
+    left: -8px;
+    bottom: -8px;
+    right: auto;
+    top: auto;
   }
 
   .sticker-blue-note-wrap {
@@ -2785,8 +2888,8 @@
 .project-dossier-overlay {
   position: fixed;
   inset: 0;
-  z-index: 2000;
-  background: rgba(22, 18, 15, 0.72);
+  z-index: 999999;
+  background: rgba(22, 18, 15, 0.78);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
@@ -2813,6 +2916,7 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
+  z-index: 1000000;
   animation: modalSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -3110,6 +3214,60 @@
   background: #f6efe6;
   border: 1px solid #ebd9c8;
   color: #493f36;
+}
+
+/* Dossier Challenges Grid */
+.dossier-challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .dossier-challenges-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dossier-challenge-item {
+  background: #fdfaf6;
+  border: 1px solid #ebd9c8;
+  border-radius: 12px;
+  padding: 14px 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dossier-challenge-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(73, 63, 54, 0.08);
+}
+
+.challenge-item-title {
+  font-family: 'Space Grotesk', var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #2b231d;
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.35;
+}
+
+.challenge-bullet {
+  color: #c2412d;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.challenge-item-desc {
+  font-family: 'Inter', var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #6a5d52;
+  margin: 0;
 }
 
 /* Footer Actions */
